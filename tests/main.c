@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 15:21:25 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 19:13:35 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,39 @@ int main(int argc, char const *argv[])
 
     str = ft_strrdbls(ft_strdup("///home///Delivery///42/str///"), '/');
     ft_printf("- ft_strrdbls: [%s]\n", str);
+    free(str);
+
+    ft_printf("ft_atoi: [%d]\n", ft_atoi("42"));
+    ft_printf("ft_itoa: [%s]\n", str = ft_itoa(42));
+    free(str);
+    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 2));
+    free(str);
+    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 4));
+    free(str);
+    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 15));
+    free(str);
+    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 9));
+    free(str);
+
+    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", '2'));
+    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'B'));
+    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'e'));
+
+    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "42"));
+    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "Code"));
+    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "n"));
+    ft_printf("ft_lents: [%d]\n\n", ft_lents("42Born2Code", "A"));
+
+    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born2Code"), "33", "42"));
+    free(str);
+    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born33Code"), "33", "42"));
+    free(str);
+    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("TestCoucouTest123Test"), "Test", "42"));
+    free(str);
+
+    ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 2, 6));
+    free(str);
+    ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 7, 11));
     free(str);
 
     return (0);

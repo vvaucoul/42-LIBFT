@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sncof.c                                         :+:      :+:    :+:   */
+/*   ft_lentc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 14:15:15 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:58:42 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 17:39:26 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 17:55:24 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool ft_sncof(const char *str, const char *cmp, size_t len)
+size_t ft_lentc(const char *str, char c)
 {
-    if (!str || !cmp)
-        return (false);
-    for (size_t i = 0; str[i] && i < len; ++i)
+    if (!str)
+        return (0);
+    if (!ft_ccof(c, str))
+        return (0);
+    for (size_t i = 0; str[i]; ++i)
     {
-        for (size_t j = 0; cmp[j]; ++j)
-        {
-            if (str[i] == cmp[j])
-                return (true);
-        }
+        if (str[i] == c)
+            return (i);
     }
-    return (false);
+    return (ft_strlen(str));
 }

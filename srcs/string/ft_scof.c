@@ -6,13 +6,13 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 02:16:28 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 02:17:57 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:58:27 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool ft_scof(char *str, const char *cmp)
+bool ft_scof(const char *str, const char *cmp)
 {
     if (!str || !cmp)
         return (false);

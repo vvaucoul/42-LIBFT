@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sncof.c                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 14:15:15 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:58:42 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 11:48:50 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 11:53:14 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool ft_sncof(const char *str, const char *cmp, size_t len)
+int ft_strsncmp(const char *str, const char *cmp, size_t start, size_t len)
 {
+    if (!len)
+        return (0);
     if (!str || !cmp)
-        return (false);
-    for (size_t i = 0; str[i] && i < len; ++i)
+        return (0);
+    if (start > ft_strlen(str))
+        return (0);
+
+    size_t i = start;
+    for (; str[i] == cmp[i]; ++i)
     {
-        for (size_t j = 0; cmp[j]; ++j)
-        {
-            if (str[i] == cmp[j])
-                return (true);
-        }
+        if ((!str[i] && !cmp[i]) || i == (len - 1))
+            return (0);
     }
-    return (false);
+    return (str[i] - cmp[i]);
 }

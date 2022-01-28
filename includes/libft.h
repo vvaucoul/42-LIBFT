@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 15:18:54 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 19:11:47 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ size_t ft_alen(const char **array);
 
 void *ft_calloc(size_t size, size_t count);
 void ft_multifree(void **ptrs);
+void ft_freetab(void **ptr);
+void ft_free(void *ptr);
 
 /******************************************************************************/
 /*							         MEMORY           		                  */
@@ -85,12 +87,16 @@ int ft_tolower(int c);
 /******************************************************************************/
 
 // - FT [String Contain One Of] => String contain one of char in str
-bool ft_scof(char *str, const char *cmp);
-bool ft_sncof(char *str, const char *cmp, size_t len);
+bool ft_scof(const char *str, const char *cmp);
+bool ft_sncof(const char *str, const char *cmp, size_t len);
 
+// - Length to Char c [Start with ptr str]
+size_t ft_lentc(const char *str, char c);
+size_t ft_lents(const char *str, const char *cmp);
 char *ft_strdup(const char *str);
 size_t ft_strlen(const char *str);
 int ft_strcmp(const char *str, const char *str2);
+int ft_strncmp(const char *str, const char *str2, size_t len);
 char *ft_strcpy(const char *str);
 char *ft_strncpy(const char *str, size_t len);
 char *ft_strchr(const char *str, int c);
@@ -104,15 +110,25 @@ char *ft_strtrim(char *str);
 char *ft_strzap(char *str, const char *pat);
 char *ft_strsplit(char *src, char **words, const char *sep);
 char *ft_strremove(const char *str, char c);
-
+// Replace pattern in src by new_pattern
+char *ft_strrep(char *src, const char *pat, const char *new_pat);
 // FT - [STR Remove Doublons] -> Remove doublons in string str
 char *ft_strrdbls(const char *str, char c);
+char *ft_substr(char *str, size_t start, size_t len);
 
 /******************************************************************************/
 /*							        NUMBERS           		                  */
 /******************************************************************************/
 
 size_t ft_nbrlen(int nbr);
+
+/******************************************************************************/
+/*							         CONVERT           		                  */
+/******************************************************************************/
+
+int ft_atoi(const char *str);
+char *ft_itoa(int n);
+char *ft_itoa_base(int nb, int base);
 
 /******************************************************************************/
 /*							         PRINT           		                  */

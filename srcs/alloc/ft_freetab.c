@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sncof.c                                         :+:      :+:    :+:   */
+/*   ft_freetab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 14:15:15 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:58:42 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 17:22:00 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 17:23:09 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool ft_sncof(const char *str, const char *cmp, size_t len)
+void ft_freetab(void **ptr)
 {
-    if (!str || !cmp)
-        return (false);
-    for (size_t i = 0; str[i] && i < len; ++i)
-    {
-        for (size_t j = 0; cmp[j]; ++j)
-        {
-            if (str[i] == cmp[j])
-                return (true);
-        }
-    }
-    return (false);
+    if (!ptr)
+        return;
+    for (size_t i = 0; ptr[i]; ++i)
+        ft_free(ptr[i]);
+    ft_free(ptr);
 }
