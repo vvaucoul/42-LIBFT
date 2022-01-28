@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 11:54:07 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:57:03 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,19 @@ int main(int argc, char const *argv[])
         ft_printf("- Memalloc [%s]\n", m_ptr);
         free(m_ptr);
 
+        char ptr5[13], ptr6[13];
+
+        ft_bzero(ptr5, 13);
+        ft_bzero(ptr6, 13);
+        ft_memcpy(ptr5, "42Born2Code", 12);
+        printf("- ft_memmove: PTR5 [%s] | PTR6 [%s]\n", ptr5, ptr6);
+        ft_memmove(ptr6, ptr5, 12);
+        printf("- ft_memmove: PTR5 [%s] | PTR6 [%s]\n", ptr5, ptr6);
+
+        ft_memcpy(ptr5, "42Born2Code", 12);
+        ft_memmove(ptr6, &ptr5[6], 6);
+
+        printf("- ft_memmove: PTR5 [%s] | PTR6 [%s]\n", ptr5, ptr6);
         ft_printf("\n\n");
     }
 
@@ -166,6 +179,52 @@ int main(int argc, char const *argv[])
     ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 7, 12));
     ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born4Code", 6, 12));
     ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 5));
+
+    ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code")));
+    free(tmp);
+    ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code ")));
+    free(tmp);
+    ft_printf("- ft_strtrim: [%s]\n\n", ft_strtrim(tmp = ft_strdup("    42 Bo    rn 2 Code ")));
+    free(tmp);
+
+    str = ft_strdup("42Born2Code");
+    ft_printf("- ft_strzap: [%s]\n", str = ft_strzap(str, "42"));
+    free(str);
+
+    ft_printf("- ft_multijoin: [%s]\n", tmp = ft_multijoin((const char *[]){"42", "Born", "2", "Code", NULL}));
+    free(tmp);
+
+    char *array[15];
+
+    ft_bzero(array, 15);
+    ft_strsplit("42Born2Code", array, "2");
+
+    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code", "2");
+    for (size_t i = 0; array[i]; ++i)
+    {
+        ft_printf("Array[%d] = [%s]\n", i, array[i]);
+        free(array[i]);
+    }
+
+    ft_bzero(array, 15);
+    ft_strsplit("42Born2Code4242TestBorn24242Code", array, "42");
+    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "42");
+
+    for (size_t i = 0; array[i]; ++i)
+    {
+        ft_printf("Array[%d] = [%s]\n", i, array[i]);
+        free(array[i]);
+    }
+
+    ft_bzero(array, 15);
+    ft_strsplit("42Born2Code4242TestBorn24242Code", array, "Born");
+    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "Born");
+
+    for (size_t i = 0; array[i]; ++i)
+    {
+        ft_printf("Array[%d] = [%s]\n", i, array[i]);
+        free(array[i]);
+    }
 
     return (0);
 }

@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/01/28 10:59:15 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/01/28 13:58:22 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS =	$(wildcard srcs/*.c) \
 		$(wildcard srcs/alloc/*.c) \
 		$(wildcard srcs/memory/*.c) \
 		$(wildcard srcs/char/*.c) \
+		$(wildcard srcs/array/*.c) \
 
 CC = clang
 AR = ar -rc
