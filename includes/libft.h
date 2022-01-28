@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 11:24:12 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:52:10 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ size_t ft_strlen(const char *str);
 int ft_strcmp(const char *str, const char *str2);
 char *ft_strcpy(const char *str);
 char *ft_strchr(const char *str, int c);
+char *ft_strjoin(const char *str, const char *join);
+char *ft_fstrjoin(char *str, const char *join);
+int ft_strsncmp(const char *str, const char *cmp, size_t start, size_t len);
 
 /******************************************************************************/
 /*							        NUMBERS           		                  */

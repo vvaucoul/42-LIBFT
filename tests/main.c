@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 11:26:24 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:54:07 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,20 @@ int main(int argc, char const *argv[])
     ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 2));
     ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 0));
     free(str);
+
+    void *tmp = NULL;
+    ft_printf("- ft_strjoin: [%s]\n", tmp = ft_strjoin("42", "Born2Code"));
+    free(tmp);
+    tmp = NULL;
+
+    ft_printf("- ft_fstrjoin: [%s]\n", tmp = ft_fstrjoin(ft_strdup("42Born"), "2Code"), "2Code");
+    free(tmp);
+
+    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born2Code", 0, 12));
+    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 12));
+    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 7, 12));
+    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born4Code", 6, 12));
+    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 5));
 
     return (0);
 }
