@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcrm.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 02:12:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 10:16:56 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 10:48:45 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 10:54:09 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *ft_memcrm(void *ptr, char c, size_t len)
+char *ft_strdup(const char *str)
 {
-    unsigned char *tmp_ptr = ptr;
-    size_t max_len = len;
-    while (len--)
-    {
-        if (tmp_ptr[len] == c)
-        {
-            for (size_t i = len; i < max_len; ++i) {
-                tmp_ptr[i] = tmp_ptr[i + 1];
-            }
-        }
-    }
-    return (ptr);
+    char *new_str = NULL;
+
+    if (!str)
+        return (NULL);
+    if (!(new_str = ft_calloc(sizeof(char), ft_strlen(str))))
+        return (NULL);
+    for (size_t i = 0; str[i]; ++i)
+        new_str[i] = str[i];
+    return (new_str);
 }

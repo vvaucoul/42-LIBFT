@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcrm.c                                        :+:      :+:    :+:   */
+/*   ft_memscmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 02:12:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 10:16:56 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 10:30:40 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 10:36:21 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *ft_memcrm(void *ptr, char c, size_t len)
+int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start)
 {
-    unsigned char *tmp_ptr = ptr;
-    size_t max_len = len;
-    while (len--)
+    unsigned char *tmp_ptr = (unsigned char *)ptr;
+    unsigned char *tmp_cmp = (unsigned char *)ptr_cmp;
+
+    while (start--)
     {
-        if (tmp_ptr[len] == c)
+        ++tmp_ptr;
+        ++tmp_cmp;
+        --len;
+    }
+    while (--len)
+    {
+        if (*tmp_ptr != *tmp_cmp)
+            return (*tmp_ptr - *tmp_cmp);
+        else
         {
-            for (size_t i = len; i < max_len; ++i) {
-                tmp_ptr[i] = tmp_ptr[i + 1];
-            }
+            ++tmp_ptr;
+            ++tmp_cmp;
         }
     }
-    return (ptr);
+    return (0);
 }

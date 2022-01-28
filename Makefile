@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/01/28 02:01:18 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/01/28 10:59:15 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ SRCS =	$(wildcard srcs/*.c) \
 
 CC = clang
 AR = ar -rc
-CFLAGS = -Wall -Wextra # -Werror # -g3
+CFLAGS = -Wall -Wextra -g3 # -Werror # -
 OBJS = $(SRCS:.c=.o)
 
 %.o:%.c

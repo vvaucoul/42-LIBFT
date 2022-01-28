@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memlen.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 02:19:31 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 02:22:16 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 10:37:10 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 10:40:11 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_memlen(const void *ptr)
+void *ft_memchr(const void *ptr, int value, size_t len)
 {
-    unsigned char *tmp = (unsigned char *)ptr;
-    size_t i = 0;
+    unsigned char *tmp_ptr = (unsigned char *)ptr;
 
-    while (tmp)
+    while (--len)
     {
-        ++tmp;
-        ++i;
+        if (*tmp_ptr == value)
+            return (tmp_ptr);
+        else
+            ++tmp_ptr;
     }
-    return (i);
+    return (NULL);
 }

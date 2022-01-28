@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 02:20:34 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:24:12 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum
 /*							         ALLOC           		                  */
 /******************************************************************************/
 
+void *ft_calloc(size_t size, size_t count);
 void ft_multifree(void **ptrs);
 
 /******************************************************************************/
@@ -40,7 +41,16 @@ void *ft_memcpy(void *dst, const void *restrict src, size_t len);
 void *ft_bzero(void *ptr, size_t len);
 void *ft_memlower(void *ptr, size_t len);
 void *ft_memupper(void *ptr, size_t len);
-size_t ft_memlen(const void *ptr);
+void *ft_memcrm(void *ptr, char c, size_t len);
+void *ft_memsrm(void *ptr, char *str, size_t len);
+int ft_memcmp(const void *ptr, const void *ptr_cmp, size_t len);
+int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start);
+void *ft_memchr(const void *ptr, int value, size_t len);
+void *ft_memshr(const void *ptr, const void *cmp, size_t len, size_t nb);
+void *ft_memalloc(void **dst, const void *ref, size_t size, size_t len);
+
+void ft_swap(int *ptr, int *ptr_swap);
+void ft_vswap(void **ptr, void **ptr2);
 
 /******************************************************************************/
 /*							          CHAR           		                  */
@@ -65,8 +75,11 @@ int ft_tolower(int c);
 
 // - FT [String Contain One Of] => String contain one of char in str
 bool ft_scof(char *str, const char *cmp);
-
+char *ft_strdup(const char *str);
 size_t ft_strlen(const char *str);
+int ft_strcmp(const char *str, const char *str2);
+char *ft_strcpy(const char *str);
+char *ft_strchr(const char *str, int c);
 
 /******************************************************************************/
 /*							        NUMBERS           		                  */

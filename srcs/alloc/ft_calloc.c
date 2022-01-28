@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcrm.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 02:12:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 10:16:56 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 10:51:18 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 11:01:19 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *ft_memcrm(void *ptr, char c, size_t len)
+void *ft_calloc(size_t size, size_t count)
 {
-    unsigned char *tmp_ptr = ptr;
-    size_t max_len = len;
-    while (len--)
-    {
-        if (tmp_ptr[len] == c)
-        {
-            for (size_t i = len; i < max_len; ++i) {
-                tmp_ptr[i] = tmp_ptr[i + 1];
-            }
-        }
-    }
+    void *ptr = NULL;
+
+    if (!(ptr = malloc(sizeof(size) * (count + 1))))
+        return (NULL);
+    ft_bzero(ptr, count + 1);
     return (ptr);
 }

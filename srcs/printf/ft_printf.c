@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 00:59:06 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 01:23:10 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:25:05 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static int display_case(t_printf *tfp, char c)
     else if (c == 's')
     {
         char *tmp = va_arg(tfp->list, char *);
-        ft_putstr(tmp);
+        if (!tmp)
+            ft_putstr("null");
+        else
+            ft_putstr(tmp);
     }
     return (0);
 }

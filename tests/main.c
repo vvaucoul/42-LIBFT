@@ -6,11 +6,12 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 02:21:04 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:26:24 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 int main(int argc, char const *argv[])
 {
@@ -65,7 +66,7 @@ int main(int argc, char const *argv[])
         ft_printf("- Memcpy [%s]\n", ptr);
         ft_printf("- Memcpy [%s]\n\n", ptr2);
 
-        char ptr3[10];
+        char ptr3[10], ptr4[13];
 
         ft_bzero(ptr3, 10);
         ft_memset(ptr3, 'A', 9);
@@ -73,9 +74,84 @@ int main(int argc, char const *argv[])
         ft_printf("- MemLower [%s]\n", ptr3);
         ft_memupper(ptr3, 9);
         ft_printf("- MemUpper [%s]\n\n", ptr3);
-        
-        ft_printf("- MemLen [%d] [%d]\n", ft_memlen(ptr3), ft_memlen(ptr));
+
+        ft_bzero(ptr4, 14);
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_memcrm(ptr4, '2', 13);
+        ft_printf("- Memcrm [%s]\n", ptr4);
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_memsrm(ptr4, "42", 13);
+        ft_printf("- Memsrm [%s]\n\n", ptr4);
+
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_swap((int *)&ptr4[0], (int *)&ptr4[3]);
+        ft_printf("- ft_swap [%s]\n", ptr4);
+
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_vswap((void *)&ptr4[0], (void *)&ptr4[3]);
+        ft_printf("- ft_vswap [%s]\n", ptr4);
+
+        ft_memcpy(ptr3, "42Born2Code", 9);
+        ft_memcpy(ptr4, "42Born2Code", 13);
+
+        ft_printf("- PTR3 [%s] | PTR4 [%s]\n", ptr3, ptr4);
+        ft_printf("- Memcmp [%d]\n", ft_memcmp(ptr3, ptr4, 9));
+        ft_swap((int *)&ptr3[0], (int *)&ptr3[4]);
+        ft_printf("- PTR3 [%s] | PTR4 [%s]\n", ptr3, ptr4);
+        ft_printf("- Memcmp [%d]\n", ft_memcmp(ptr3, ptr4, 9));
+
+        ft_memcpy(ptr3, "42Born4Code", 9);
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_printf("- PTR3 [%s] | PTR4 [%s]\n", ptr3, ptr4);
+        ft_printf("- Memscmp [%d]\n", ft_memscmp(ptr3, ptr4, 9, 7));
+        ft_printf("- Memscmp [%d]\n\n", ft_memscmp(ptr3, ptr4, 9, 0));
+
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_printf("- Memchr [%s]\n", ft_memchr(ptr4, '2', 13));
+        ft_printf("- Memchr [%s]\n", ft_memchr(ptr4, 'C', 13));
+
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_printf("- Memshr [%s]\n", ft_memshr(ptr4, "42", 13, 2));
+        ft_printf("- Memshr [%s]\n", ft_memshr(ptr4, "Co", 13, 2));
+        ft_printf("- Memshr [%s]\n", ft_memshr(ptr4, "Born2Code", 13, 10));
+
+        void *m_ptr = NULL;
+
+        ft_memcpy(ptr4, "42Born2Code", 13);
+        ft_memalloc((void *)&m_ptr, ptr4, sizeof(char), 13);
+        ft_printf("- Memalloc [%s]\n", m_ptr);
+        free(m_ptr);
+
+        ft_printf("\n\n");
     }
+
+    char *str = ft_strdup("42Born2Code");
+    char *str2 = ft_strdup("42Born4Code");
+    ft_printf("- STR [%s] | STR2 [%s]\n", str, str2);
+
+    ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
+    ft_memcpy(str, "42Born2Code", 12);
+    ft_memcpy(str2, "42Born2Code", 12);
+    ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
+    ft_memcpy(str, "42Born4Code", 12);
+    ft_memcpy(str2, "42Born2Code", 12);
+    ft_printf("- STRcmp [%d]\n\n", ft_strcmp(str, str2));
+
+    free(str);
+    free(str2);
+
+    str = ft_strdup("42Born2Code");
+    str2 = ft_strcpy(str);
+    ft_printf("- STRcpy [%s]\n", str2);
+    free(str);
+    free(str2);
+
+    str = ft_strdup("42Born2Code");
+    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 'n'));
+    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, '2'));
+    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 2));
+    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 0));
+    free(str);
 
     return (0);
 }
