@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 14:55:28 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:18:54 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ int ft_strsncmp(const char *str, const char *cmp, size_t start, size_t len);
 char *ft_strtrim(char *str);
 char *ft_strzap(char *str, const char *pat);
 char *ft_strsplit(char *src, char **words, const char *sep);
+char *ft_strremove(const char *str, char c);
+
+// FT - [STR Remove Doublons] -> Remove doublons in string str
+char *ft_strrdbls(const char *str, char c);
 
 /******************************************************************************/
 /*							        NUMBERS           		                  */

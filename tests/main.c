@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 14:57:03 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:21:25 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,14 @@ int main(int argc, char const *argv[])
         ft_printf("Array[%d] = [%s]\n", i, array[i]);
         free(array[i]);
     }
+
+    str = ft_strremove(ft_strdup("42Born2Code"), '2');
+    ft_printf("- ft_strremove: [%s]\n", str);
+    free(str);
+
+    str = ft_strrdbls(ft_strdup("///home///Delivery///42/str///"), '/');
+    ft_printf("- ft_strrdbls: [%s]\n", str);
+    free(str);
 
     return (0);
 }
