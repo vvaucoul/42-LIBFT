@@ -1,0 +1,956 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri Jan 28 23:27:46 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+DESKTOP_SESSION = ubuntu
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_SESSION_CLASS = user
+# environment
+SNAP_COMMON = /var/snap/code/common
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 34)
+_IGREY = $'\033[40m
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/vintz/Delivery/42-LIBFT
+# makefile
+SHELL = /bin/sh
+# environment
+SNAP_DATA = /var/snap/code/85
+# makefile (from 'Makefile', line 25)
+_RED = $'\033[31m
+# environment
+VTE_VERSION = 6003
+# environment
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"9fdd4736c50ab5d00bf618b3d10bedcc.fr","_translationsConfigFile":"/home/vintz/.config/Code/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/tcf.json","_cacheRoot":"/home/vintz/.config/Code/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr","_resolvedLanguagePackCoreLocation":"/home/vintz/.config/Code/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/899d46d82c4c95423fb7e10e68eba52050e30ba3","_corruptedFile":"/home/vintz/.config/Code/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/corrupted.info","_languagePackSupport":true}
+# environment
+JOURNAL_STREAM = 8:41918
+# makefile (from 'Makefile', line 70)
+CFLAGS = -Wall -Wextra -g3 
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+SNAP_ARCH = amd64
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+IM_CONFIG_PHASE = 1
+# environment
+USERNAME = vintz
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 71)
+OBJS = $(SRCS:.c=.o)
+# environment
+MANAGERPID = 2718
+# makefile (from 'Makefile', line 41)
+_IWHITE = $'\033[47m
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4b12f686-9c20-4456-9db5-45551734a0ee.sock
+# environment
+VSCODE_CWD = /home/vintz/Delivery
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/85/usr/share/glib-2.0/schemas
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 27)
+_YELLOW = $'\033[33m
+# environment
+PATH = /home/vintz/.local/bin:/home/vintz/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# makefile (from 'Makefile', line 18)
+_END = $'\033[0m
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+SESSION_MANAGER = local/Vintz:@/tmp/.ICE-unix/3020,unix/Vintz:/tmp/.ICE-unix/3020
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/vintz/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+SNAP = /snap/code/85
+# makefile (from 'Makefile', line 24)
+_GREY = $'\033[30m
+# environment
+SNAP_VERSION = 899d46d8
+# makefile (from 'Makefile', line 21)
+_REV = $'\033[7m
+# makefile (from 'Makefile', line 69)
+AR = ar -rc
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+DISABLE_WAYLAND = 1
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=d2c4f724-4939-4ede-9abf-94c14d48c482&iid=d2c4f724-4939-4ede-9abf-94c14d48c482&sid=d2c4f724-4939-4ede-9abf-94c14d48c482","uploadToServer":true}
+# environment
+INVOCATION_ID = 9b4e7d2cab62435eb3cc363f8829574b
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/85/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3716
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+PWD = /home/vintz/Delivery/42-LIBFT
+# makefile (from 'Makefile', line 48)
+PRINT_COMP = printf "\r$(_BOLD)$(_WHITE)- $(_BOLD)$(_CYAN)[%s]\r\t\t\t\t\t $(_BOLD)$(_WHITE)[✓]\n"
+# default
+.LOADED := 
+# environment
+SSH_AGENT_PID = 2946
+# makefile (from 'Makefile', line 29)
+_PURPLE = $'\033[35m
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# makefile (from 'Makefile', line 31)
+_WHITE = $'\033[37m
+# environment
+GTK_MODULES = gail:atk-bridge
+# makefile (from 'Makefile', line 28)
+_BLUE = $'\033[34m
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /home/vintz
+# makefile (from 'Makefile', line 30)
+_CYAN = $'\033[36m
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/vintz/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
+# environment
+LOGNAME = vintz
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# environment
+SNAP_CONTEXT = N4YqvtjB9FoJFzw_0GXg3qQgvF73MklQfz2pM4mNzEfxuFbn77TH
+# environment
+ZSH = /home/vintz/.oh-my-zsh
+# environment
+SNAP_USER_COMMON = /home/vintz/snap/code/common
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# environment
+SNAP_REAL_HOME = /home/vintz
+# environment
+COLORTERM = truecolor
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# makefile (from 'Makefile', line 56)
+SRCS = $(wildcard srcs/*.c) $(wildcard srcs/print/*.c) $(wildcard srcs/number/*.c) $(wildcard srcs/printf/*.c) $(wildcard srcs/string/*.c) $(wildcard srcs/alloc/*.c) $(wildcard srcs/memory/*.c) $(wildcard srcs/char/*.c) $(wildcard srcs/array/*.c) $(wildcard srcs/convert/*.c) $(wildcard srcs/linked_list/*.c) 
+# environment
+SNAP_USER_DATA = /home/vintz/snap/code/85
+# environment
+SHLVL = 1
+# makefile (from 'Makefile', line 68)
+CC = clang
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = vintz
+# environment
+SNAP_REVISION = 85
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# makefile (from 'Makefile', line 19)
+_BOLD = $'\033[1m
+# makefile (from 'Makefile', line 55)
+NAME = 42_PCC_LIBFT.a
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (from 'Makefile', line 20)
+_UNDER = $'\033[4m
+# makefile (from 'Makefile', line 35)
+_IRED = $'\033[41m
+# default
+MAKE_COMMAND := make
+# environment
+OLDPWD = /home/vintz
+# environment
+TERMINATOR_DBUS_PATH = /net/tenshu/Terminator2
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 36)
+_IGREEN = $'\033[42m
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-fe61d975-1.63.2-main.sock
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+BREAKPAD_DUMP_LOCATION = /home/vintz/.config/Code/exthost Crash Reports
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 37)
+_IYELLOW = $'\033[43m
+# environment
+GDK_BACKEND = x11
+# automatic
++F = $(notdir $+)
+# environment
+NO_AT_BRIDGE = 1
+# environment
+QT_ACCESSIBILITY = 1
+# default
+MAKEFILES := 
+# environment
+SNAP_COOKIE = N4YqvtjB9FoJFzw_0GXg3qQgvF73MklQfz2pM4mNzEfxuFbn77TH
+# automatic
+<F = $(notdir $<)
+ 
+# makefile (from 'Makefile', line 40)
+_ICYAN = $'\033[46m
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+SNAP_NAME = code
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 38)
+_IBLUE = $'\033[44m
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+SNAP_REEXEC = 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# makefile (from 'Makefile', line 39)
+_IPURPLE = $'\033[45m
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# makefile (from 'Makefile', line 26)
+_GREEN = $'\033[32m
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+TERMINATOR_DBUS_NAME = net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873
+# environment
+VSCODE_PID = 219028
+# environment
+TERMINATOR_UUID = urn:uuid:efd43611-1f8b-43fa-bc4b-07f6985bb6d2
+# variable set hash-table stats:
+# Load=154/1024=15%, Rehash=0, Collisions=21/201=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# srcs/linked_list (device 2053, inode 6311946): 10 files, no impossibilities.
+# . (device 2053, inode 6035528): 13 files, no impossibilities.
+# srcs/number (device 2053, inode 6312741): 3 files, no impossibilities.
+# srcs/memory (device 2053, inode 6311953): 17 files, no impossibilities.
+# srcs/string (device 2053, inode 6311945): 27 files, no impossibilities.
+# srcs/convert (device 2053, inode 6316045): 5 files, no impossibilities.
+# srcs/array (device 2053, inode 6311950): 8 files, no impossibilities.
+# srcs/printf (device 2053, inode 6312723): 3 files, no impossibilities.
+# srcs/alloc (device 2053, inode 6311952): 8 files, no impossibilities.
+# srcs/char (device 2053, inode 6311951): 12 files, no impossibilities.
+# srcs/print (device 2053, inode 6311954): 7 files, no impossibilities.
+# srcs (device 2053, inode 6089820): 16 files, no impossibilities.
+
+# 129 files, no impossibilities in 12 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  recipe to execute (from 'Makefile', line 74):
+	@echo -n "\r                                                               "
+	@$(PRINT_COMP) $@
+	@$(CC) $(CFLAGS) -I./includes -c $< -o ${<:.c=.o}
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+srcs/memory/ft_memchr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memset.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_swap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/print/ft_putsarray.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/convert/ft_atoi.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strncpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_afree.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strncmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memalloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strcpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: 42_PCC_LIBFT.a
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/18=0%
+
+# Not a target:
+srcs/string/ft_strcmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_lents.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/convert/ft_itoa_base.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all clean fclean re test
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+42_PCC_LIBFT.a: srcs/print/ft_putchar.o srcs/print/ft_putendl.o srcs/print/ft_pustr.o srcs/print/ft_putnbr.o srcs/print/ft_putsarray.o srcs/number/ft_nbrlen.o srcs/printf/ft_printf.o srcs/string/ft_strncpy.o srcs/string/ft_sncof.o srcs/string/ft_substr.o srcs/string/ft_strrdbls.o srcs/string/ft_strchr.o srcs/string/ft_lents.o srcs/string/ft_strremove.o srcs/string/ft_strdup.o srcs/string/ft_strsplit.o srcs/string/ft_strcjoin.o srcs/string/ft_strlen.o srcs/string/ft_lentc.o srcs/string/ft_strrep.o srcs/string/ft_strmapi.o srcs/string/ft_strjoin.o srcs/string/ft_strcmp.o srcs/string/ft_fstrjoin.o srcs/string/ft_strcpy.o srcs/string/ft_strtrim.o srcs/string/ft_strsncmp.o srcs/string/ft_multijoin.o srcs/string/ft_fstrcjoin.o srcs/string/ft_strncmp.o srcs/string/ft_scof.o srcs/string/ft_strzap.o srcs/alloc/ft_free.o srcs/alloc/ft_calloc.o srcs/alloc/ft_multifree.o srcs/alloc/ft_realloc.o srcs/alloc/ft_aalloc.o srcs/alloc/ft_afree.o srcs/memory/ft_swap.o srcs/memory/ft_vswap.o srcs/memory/ft_memupper.o srcs/memory/ft_memset.o srcs/memory/ft_memlower.o srcs/memory/ft_memchr.o srcs/memory/ft_memmove.o srcs/memory/ft_memcrm.o srcs/memory/ft_memscmp.o srcs/memory/ft_memshr.o srcs/memory/ft_memcmp.o srcs/memory/ft_memalloc.o srcs/memory/ft_memcpy.o srcs/memory/ft_memsrm.o srcs/memory/ft_bzero.o srcs/char/ft_toupper.o srcs/char/ft_islower.o srcs/char/ft_isupper.o srcs/char/ft_isspace.o srcs/char/ft_isdigit.o srcs/char/ft_isalnum.o srcs/char/ft_isalpha.o srcs/char/ft_tolower.o srcs/char/ft_ccof.o srcs/char/ft_isascii.o srcs/array/ft_acol.o srcs/array/ft_acof.o srcs/array/ft_alen.o srcs/array/ft_acpy.o srcs/array/ft_asize.o srcs/array/ft_split.o srcs/convert/ft_itoa_base.o srcs/convert/ft_itoa.o srcs/convert/ft_atoi.o srcs/linked_list/ft_lstiter.o srcs/linked_list/ft_lstlast.o srcs/linked_list/ft_lstadd_back.o srcs/linked_list/ft_lstdelone.o srcs/linked_list/ft_lstadd_front.o srcs/linked_list/ft_lstclear.o srcs/linked_list/ft_lstsize.o srcs/linked_list/ft_lstnew.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/18=0%
+#  recipe to execute (from 'Makefile', line 85):
+	@$(AR) $(NAME) $(OBJS)
+
+# Not a target:
+srcs/linked_list/ft_lstsize.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_vswap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strchr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_bzero.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/print/ft_putnbr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/convert/ft_itoa.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strrep.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memcrm.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/array/ft_acof.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-01-28 20:18:46.608025802
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/linked_list/ft_lstadd_front.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memsrm.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_isalpha.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstdelone.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+test:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 96):
+	make
+	@$(PRINT_COMP) "lft_test"
+	@clang tests/main.c  -I./includes 42_PCC_LIBFT.a -o lft_test
+
+ 
+# Not a target:
+srcs/array/ft_acol.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strtrim.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strmapi.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/array/ft_acpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_isalnum.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strzap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 91):
+		@rm -f $(NAME)
+
+# Not a target:
+srcs/char/ft_isupper.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_multifree.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strlen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_fstrcjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strcjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_lentc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_calloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memupper.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strdup.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstadd_back.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strrdbls.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstiter.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_fstrjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+srcs/print/ft_putchar.o: srcs/print/ft_putchar.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'srcs/print/ft_putchar'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := srcs/print/ft_putchar.o
+# automatic
+# % := 
+# automatic
+# * := srcs/print/ft_putchar
+# automatic
+# + := srcs/print/ft_putchar.c
+# automatic
+# | := 
+# automatic
+# < := srcs/print/ft_putchar.c
+# automatic
+# ^ := srcs/print/ft_putchar.c
+# automatic
+# ? := srcs/print/ft_putchar.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=4/29=14%
+#  recipe to execute (from 'Makefile', line 74):
+	@echo -n "\r                                                               "
+	@$(PRINT_COMP) $@
+	@$(CC) $(CFLAGS) -I./includes -c $< -o ${<:.c=.o}
+
+# Not a target:
+srcs/memory/ft_memmove.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstlast.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/array/ft_asize.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_isascii.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_sncof.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 88):
+		@rm -f $(OBJS)
+
+# Not a target:
+srcs/string/ft_scof.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/printf/ft_printf.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_realloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/print/ft_pustr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_multijoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/print/ft_putendl.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strremove.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_strsplit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_islower.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_free.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstclear.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_isdigit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memshr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ 
+srcs/char/ft_isspace.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memscmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/array/ft_split.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_toupper.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/number/ft_nbrlen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_ccof.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/char/ft_tolower.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/string/ft_substr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memcpy.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/array/ft_alen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/alloc/ft_aalloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memcmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/print/ft_putchar.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-01-28 01:29:24.648523938
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/string/ft_strsncmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/memory/ft_memlower.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/linked_list/ft_lstnew.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=91/1024=9%, Rehash=0, Collisions=13/195=7%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 212 / storage = 3455 B / avg = 16 B
+# current buf: size = 8162 B / used = 3455 B / count = 212 / avg = 16 B
+
+# strcache performance: lookups = 257 / hit rate = 17%
+# hash-table stats:
+# Load=212/8192=3%, Rehash=0, Collisions=17/257=7%
+# Finished Make data base on Fri Jan 28 23:27:46 2022
+
+ 

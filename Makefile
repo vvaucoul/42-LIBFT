@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/01/28 17:26:53 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/01/28 20:18:46 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ _IWHITE=$'\033[47m
 ################################################################################
 
 ### PRINT UTILS ###
-PRINT_COMP		=	printf "\r$(_BOLD)$(_WHITE)- $(_BOLD)$(_CYAN)[%s]\r\t\t\t\t $(_BOLD)$(_WHITE)[✓]\n"
+PRINT_COMP		=	printf "\r$(_BOLD)$(_WHITE)- $(_BOLD)$(_CYAN)[%s]\r\t\t\t\t\t $(_BOLD)$(_WHITE)[✓]\n"
 
 
 ################################################################################
@@ -63,6 +63,7 @@ SRCS =	$(wildcard srcs/*.c) \
 		$(wildcard srcs/char/*.c) \
 		$(wildcard srcs/array/*.c) \
 		$(wildcard srcs/convert/*.c) \
+		$(wildcard srcs/linked_list/*.c) \
 
 CC = clang
 AR = ar -rc

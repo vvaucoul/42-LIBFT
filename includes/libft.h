@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 19:11:47 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 22:50:09 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,25 @@
 
 #include "ft_printf.h"
 
+/******************************************************************************/
+/*							         ENUMS           		                  */
+/******************************************************************************/
+
 typedef enum
 {
     false,
     true
 } bool;
+
+/******************************************************************************/
+/*							         STRUCTURES           		              */
+/******************************************************************************/
+
+typedef struct s_list
+{
+    void *data;
+    struct s_list *next;
+} t_list;
 
 /******************************************************************************/
 /*							         ARRAY           		                  */
@@ -33,6 +47,8 @@ typedef enum
 bool ft_acof(const char **array, const char *str);
 size_t ft_asize(const char **array);
 size_t ft_alen(const char **array);
+char **ft_acpy(const char **arr);
+char **ft_split(const char *str, char del);
 
 /******************************************************************************/
 /*							         ALLOC           		                  */
@@ -40,8 +56,11 @@ size_t ft_alen(const char **array);
 
 void *ft_calloc(size_t size, size_t count);
 void ft_multifree(void **ptrs);
-void ft_freetab(void **ptr);
+void ft_afree(void **ptr);
 void ft_free(void *ptr);
+size_t ft_acol(const char **array);
+void **ft_aalloc(size_t size, size_t size_x, size_t size_y);
+void *ft_realloc(void *ptr, size_t newsize);
 
 /******************************************************************************/
 /*							         MEMORY           		                  */
@@ -54,13 +73,12 @@ void *ft_memlower(void *ptr, size_t len);
 void *ft_memupper(void *ptr, size_t len);
 void *ft_memcrm(void *ptr, char c, size_t len);
 void *ft_memsrm(void *ptr, char *str, size_t len);
-int ft_memcmp(const void *ptr, const void *ptr_cmp, size_t len);
-int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start);
 void *ft_memchr(const void *ptr, int value, size_t len);
 void *ft_memshr(const void *ptr, const void *cmp, size_t len, size_t nb);
 void *ft_memalloc(void **dst, const void *ref, size_t size, size_t len);
 void *ft_memmove(void *dest, const void *ptr, size_t len);
-
+int ft_memcmp(const void *ptr, const void *ptr_cmp, size_t len);
+int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start);
 void ft_swap(int *ptr, int *ptr_swap);
 void ft_vswap(void **ptr, void **ptr2);
 
@@ -115,6 +133,7 @@ char *ft_strrep(char *src, const char *pat, const char *new_pat);
 // FT - [STR Remove Doublons] -> Remove doublons in string str
 char *ft_strrdbls(const char *str, char c);
 char *ft_substr(char *str, size_t start, size_t len);
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /******************************************************************************/
 /*							        NUMBERS           		                  */
@@ -131,6 +150,19 @@ char *ft_itoa(int n);
 char *ft_itoa_base(int nb, int base);
 
 /******************************************************************************/
+/*							       LINKED LIST           		              */
+/******************************************************************************/
+
+void ft_lstadd_back(t_list **lst, t_list *new);
+void ft_lstadd_front(t_list **lst, t_list *new);
+size_t ft_lstsize(t_list *lst);
+t_list *ft_lstnew(void *data);
+t_list *ft_lstlast(t_list *lst);
+void ft_lstiter(t_list *lst, void (*f)(void *));
+void ft_lstdelone(t_list *lst, void (*f)(void *));
+void ft_lstclear(t_list **lst, void (*f)(void *));
+
+/******************************************************************************/
 /*							         PRINT           		                  */
 /******************************************************************************/
 
@@ -138,5 +170,6 @@ void ft_putchar(char c);
 void ft_putendl(const char *str);
 void ft_putstr(const char *str);
 void ft_putnbr(int nbr);
+void ft_putsarray(const char **array);
 
 #endif

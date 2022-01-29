@@ -6,12 +6,17 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 19:18:57 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 19:13:35 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/01/28 20:29:50 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <string.h>
+
+static void lst_clear()
+{
+    return ;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -138,134 +143,168 @@ int main(int argc, char const *argv[])
         ft_printf("\n\n");
     }
 
-    char *str = ft_strdup("42Born2Code");
-    char *str2 = ft_strdup("42Born4Code");
-    ft_printf("- STR [%s] | STR2 [%s]\n", str, str2);
+    ft_printf("\n### STRINGS ###\n\n");
 
-    ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
-    ft_memcpy(str, "42Born2Code", 12);
-    ft_memcpy(str2, "42Born2Code", 12);
-    ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
-    ft_memcpy(str, "42Born4Code", 12);
-    ft_memcpy(str2, "42Born2Code", 12);
-    ft_printf("- STRcmp [%d]\n\n", ft_strcmp(str, str2));
-
-    free(str);
-    free(str2);
-
-    str = ft_strdup("42Born2Code");
-    str2 = ft_strcpy(str);
-    ft_printf("- STRcpy [%s]\n", str2);
-    free(str);
-    free(str2);
-
-    str = ft_strdup("42Born2Code");
-    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 'n'));
-    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, '2'));
-    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 2));
-    ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 0));
-    free(str);
-
-    void *tmp = NULL;
-    ft_printf("- ft_strjoin: [%s]\n", tmp = ft_strjoin("42", "Born2Code"));
-    free(tmp);
-    tmp = NULL;
-
-    ft_printf("- ft_fstrjoin: [%s]\n", tmp = ft_fstrjoin(ft_strdup("42Born"), "2Code"), "2Code");
-    free(tmp);
-
-    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born2Code", 0, 12));
-    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 12));
-    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 7, 12));
-    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born4Code", 6, 12));
-    ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 5));
-
-    ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code")));
-    free(tmp);
-    ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code ")));
-    free(tmp);
-    ft_printf("- ft_strtrim: [%s]\n\n", ft_strtrim(tmp = ft_strdup("    42 Bo    rn 2 Code ")));
-    free(tmp);
-
-    str = ft_strdup("42Born2Code");
-    ft_printf("- ft_strzap: [%s]\n", str = ft_strzap(str, "42"));
-    free(str);
-
-    ft_printf("- ft_multijoin: [%s]\n", tmp = ft_multijoin((const char *[]){"42", "Born", "2", "Code", NULL}));
-    free(tmp);
-
-    char *array[15];
-
-    ft_bzero(array, 15);
-    ft_strsplit("42Born2Code", array, "2");
-
-    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code", "2");
-    for (size_t i = 0; array[i]; ++i)
     {
-        ft_printf("Array[%d] = [%s]\n", i, array[i]);
-        free(array[i]);
+        char *str = ft_strdup("42Born2Code");
+        char *str2 = ft_strdup("42Born4Code");
+        ft_printf("- STR [%s] | STR2 [%s]\n", str, str2);
+
+        ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
+        ft_memcpy(str, "42Born2Code", 12);
+        ft_memcpy(str2, "42Born2Code", 12);
+        ft_printf("- STRcmp [%d]\n", ft_strcmp(str, str2));
+        ft_memcpy(str, "42Born4Code", 12);
+        ft_memcpy(str2, "42Born2Code", 12);
+        ft_printf("- STRcmp [%d]\n\n", ft_strcmp(str, str2));
+
+        free(str);
+        free(str2);
+
+        str = ft_strdup("42Born2Code");
+        str2 = ft_strcpy(str);
+        ft_printf("- STRcpy [%s]\n", str2);
+        free(str);
+        free(str2);
+
+        str = ft_strdup("42Born2Code");
+        ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 'n'));
+        ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, '2'));
+        ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 2));
+        ft_printf("- ft_strchr: [%s]\n", ft_strchr(str, 0));
+        free(str);
+
+        void *tmp = NULL;
+        ft_printf("- ft_strjoin: [%s]\n", tmp = ft_strjoin("42", "Born2Code"));
+        free(tmp);
+        tmp = NULL;
+
+        ft_printf("- ft_fstrjoin: [%s]\n", tmp = ft_fstrjoin(ft_strdup("42Born"), "2Code"), "2Code");
+        free(tmp);
+
+        ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born2Code", 0, 12));
+        ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 12));
+        ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 7, 12));
+        ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born2Code", "42Born4Code", 6, 12));
+        ft_printf("- ft_strsncmp: [%d]\n", ft_strsncmp("42Born4Code", "42Born2Code", 0, 5));
+
+        ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code")));
+        free(tmp);
+        ft_printf("- ft_strtrim: [%s]\n", ft_strtrim(tmp = ft_strdup("42 Born 2 Code ")));
+        free(tmp);
+        ft_printf("- ft_strtrim: [%s]\n\n", ft_strtrim(tmp = ft_strdup("    42 Bo    rn 2 Code ")));
+        free(tmp);
+
+        str = ft_strdup("42Born2Code");
+        ft_printf("- ft_strzap: [%s]\n", str = ft_strzap(str, "42"));
+        free(str);
+
+        ft_printf("- ft_multijoin: [%s]\n", tmp = ft_multijoin((const char *[]){"42", "Born", "2", "Code", NULL}));
+        free(tmp);
+
+        char *array[15];
+
+        ft_bzero(array, 15);
+        ft_strsplit("42Born2Code", array, "2");
+
+        ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code", "2");
+        for (size_t i = 0; array[i]; ++i)
+        {
+            ft_printf("Array[%d] = [%s]\n", i, array[i]);
+            free(array[i]);
+        }
+
+        ft_bzero(array, 15);
+        ft_strsplit("42Born2Code4242TestBorn24242Code", array, "42");
+        ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "42");
+
+        for (size_t i = 0; array[i]; ++i)
+        {
+            ft_printf("Array[%d] = [%s]\n", i, array[i]);
+            free(array[i]);
+        }
+
+        ft_bzero(array, 15);
+        ft_strsplit("42Born2Code4242TestBorn24242Code", array, "Born");
+        ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "Born");
+
+        for (size_t i = 0; array[i]; ++i)
+        {
+            ft_printf("Array[%d] = [%s]\n", i, array[i]);
+            free(array[i]);
+        }
+
+        str = ft_strremove(ft_strdup("42Born2Code"), '2');
+        ft_printf("- ft_strremove: [%s]\n", str);
+        free(str);
+
+        str = ft_strrdbls(ft_strdup("///home///Delivery///42/str///"), '/');
+        ft_printf("- ft_strrdbls: [%s]\n", str);
+        free(str);
+
+        ft_printf("ft_atoi: [%d]\n", ft_atoi("42"));
+        ft_printf("ft_itoa: [%s]\n", str = ft_itoa(42));
+        free(str);
+        ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 2));
+        free(str);
+        ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 4));
+        free(str);
+        ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 15));
+        free(str);
+        ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 9));
+        free(str);
+
+        ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", '2'));
+        ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'B'));
+        ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'e'));
+
+        ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "42"));
+        ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "Code"));
+        ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "n"));
+        ft_printf("ft_lents: [%d]\n\n", ft_lents("42Born2Code", "A"));
+
+        ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born2Code"), "33", "42"));
+        free(str);
+        ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born33Code"), "33", "42"));
+        free(str);
+        ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("TestCoucouTest123Test"), "Test", "42"));
+        free(str);
+
+        ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 2, 6));
+        free(str);
+        ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 7, 11));
+        free(str);
     }
 
-    ft_bzero(array, 15);
-    ft_strsplit("42Born2Code4242TestBorn24242Code", array, "42");
-    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "42");
-
-    for (size_t i = 0; array[i]; ++i)
+    ft_printf("\n### ARRAY ###\n\n");
     {
-        ft_printf("Array[%d] = [%s]\n", i, array[i]);
-        free(array[i]);
+        const char *tab[5] = {"42", "Born", "2", "Code", NULL};
+        ft_printf("- ft_asize [%d]\n", ft_asize(tab));
+        ft_printf("- ft_alen [%d]\n", ft_alen(tab));
+        ft_printf("- ft_acof [%d]\n", ft_acof(tab, "42"));
+        ft_printf("- ft_acof [%d]\n", ft_acof(tab, "toto"));
+
+        ft_printf("Print Array:\n");
+        ft_putsarray(tab);
+
+        char **ntab = (char **)ft_acpy(tab);
+
+        ft_printf("Print Array:\n");
+        ft_putsarray((const char **)ntab);
+        ft_afree((void **)ntab);
+
+        ntab = ft_split("42Born2Code", '2');
+        ft_printf("- ft_split: \n");
+        ft_putsarray(tab);
+        ft_afree((void **)ntab);
     }
 
-    ft_bzero(array, 15);
-    ft_strsplit("42Born2Code4242TestBorn24242Code", array, "Born");
-    ft_printf("- STRSplit: [%s] [%s]\n", "42Born2Code4242TestBorn24242Code", "Born");
-
-    for (size_t i = 0; array[i]; ++i)
+    ft_printf("\n### LINKED LIST ###\n\n");
     {
-        ft_printf("Array[%d] = [%s]\n", i, array[i]);
-        free(array[i]);
+        t_list *new_list = NULL;
+        t_list *new = ft_lstnew((int *)4);
+        ft_lstadd_back(&new_list, new);
+        ft_lstclear(&new_list, &lst_clear);
     }
-
-    str = ft_strremove(ft_strdup("42Born2Code"), '2');
-    ft_printf("- ft_strremove: [%s]\n", str);
-    free(str);
-
-    str = ft_strrdbls(ft_strdup("///home///Delivery///42/str///"), '/');
-    ft_printf("- ft_strrdbls: [%s]\n", str);
-    free(str);
-
-    ft_printf("ft_atoi: [%d]\n", ft_atoi("42"));
-    ft_printf("ft_itoa: [%s]\n", str = ft_itoa(42));
-    free(str);
-    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 2));
-    free(str);
-    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 4));
-    free(str);
-    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 15));
-    free(str);
-    ft_printf("ft_itoa_base: [%s]\n", str = ft_itoa_base(42, 9));
-    free(str);
-
-    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", '2'));
-    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'B'));
-    ft_printf("ft_lentc: [%d]\n", ft_lentc("42Born2Code", 'e'));
-
-    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "42"));
-    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "Code"));
-    ft_printf("ft_lents: [%d]\n", ft_lents("42Born2Code", "n"));
-    ft_printf("ft_lents: [%d]\n\n", ft_lents("42Born2Code", "A"));
-
-    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born2Code"), "33", "42"));
-    free(str);
-    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("33Born33Code"), "33", "42"));
-    free(str);
-    ft_printf("ft_strrep: [%s]\n", str = ft_strrep(ft_strdup("TestCoucouTest123Test"), "Test", "42"));
-    free(str);
-
-    ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 2, 6));
-    free(str);
-    ft_printf("ft_substr: [%s]\n", str = ft_substr(ft_strdup("42Born2Code"), 7, 11));
-    free(str);
-
     return (0);
 }

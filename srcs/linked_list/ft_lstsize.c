@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freetab.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 17:22:00 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:23:09 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/01/28 20:13:48 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/01/28 20:14:42 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_freetab(void **ptr)
+size_t ft_lstsize(t_list *lst)
 {
-    if (!ptr)
-        return;
-    for (size_t i = 0; ptr[i]; ++i)
-        ft_free(ptr[i]);
-    ft_free(ptr);
+    size_t n = 0;
+    t_list *tmp = lst;
+
+    while (tmp)
+    {
+        ++n;
+        tmp = tmp->next;
+    }
+    return (n);
 }
