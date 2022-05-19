@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 01:00:32 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/05/18 23:44:07 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:53:12 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ typedef struct s_printf
 } t_printf;
 
 int ft_printf(const char *str, ...);
-
 
 #endif

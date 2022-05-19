@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/05/19 11:16:42 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:49:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_list
 /*							         ARRAY           		                  */
 /******************************************************************************/
 
-// - FT [Array Contain One Of] -> Check if array contain str
 bool ft_acof(const char **array, const char *str);
 size_t ft_asize(const char **array);
 size_t ft_alen(const char **array);
