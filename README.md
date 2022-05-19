@@ -139,7 +139,7 @@ void ft_putsarray(const char **array);
 > - s
 
 ```C
-- int ft_printf(const char *str, ...);
+int ft_printf(const char *str, ...);
 ```
 
 ### AUTO-ALLOCATOR
@@ -153,12 +153,12 @@ void ft_putsarray(const char **array);
 - Also, you can delete all your ptrs with the function 'AA_free' at the end of your program.
 
 ```C
-- void *AA_allocate_ptr(size_t size, size_t var_size);
-- void AA_free_ptr(void *ptr);
-- void AA_push_ptr(void *ptr);
-- void AA_free(void);
-- size_t AA_get_node_size(void);
-- void AA_print_nodes(void);
+void *AA_allocate_ptr(size_t size, size_t var_size);
+void AA_free_ptr(void *ptr);
+void AA_push_ptr(void *ptr);
+void AA_free(void);
+size_t AA_get_node_size(void);
+void AA_print_nodes(void);
 ```
 
 ### BINARY-TREE
@@ -166,12 +166,12 @@ void ft_putsarray(const char **array);
 - Simple binary-tree, faster than linked list.
 
 ```C
-- T_NODE *BT_new_node(void *data);
-- T_NODE *BT_insert_node(T_NODE *root, void *data);
-- T_NODE *BT_get_root(void);
-- size_t BT_get_node_size(void);
-- void BT_display_nodes(T_NODE *node);
-- void *BT_delete_node(T_NODE *root, void *data, int delete_data);
-- void BT_delete_tree(T_NODE *root, int delete_data);
+T_NODE *BT_new_node(void *data);
+T_NODE *BT_insert_node(T_NODE *root, void *data);
+T_NODE *BT_get_root(void);
+size_t BT_get_node_size(void);
+void BT_display_nodes(T_NODE *node);
+void *BT_delete_node(T_NODE *root, void *data, int delete_data);
+void BT_delete_tree(T_NODE *root, int delete_data);
 ```
 
