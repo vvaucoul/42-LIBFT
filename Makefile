@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/05/19 11:46:51 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/05/19 12:06:54 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRCS =	$(wildcard srcs/*.c) \
 		$(wildcard srcs/linked_list/*.c) \
 		$(wildcard srcs/auto-allocator/*.c) \
 		$(wildcard srcs/binary-tree/*.c) \
+		$(wildcard srcs/classes/*.c) \
 
 CC = gcc
 AR = ar -rc
