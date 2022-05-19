@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:02:35 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/05/19 12:37:21 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:03:55 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 
 typedef struct s_vector
 {
-    void *root;
+    void **root;
     size_t size;
 } t_vector;
 
 #define Vector t_vector
 
 Vector *vector_new(size_t size, size_t count);
+void vector_delete(Vector *vector);
 
 /*******************************************************************************
  *                                  CAPACITY                                   *
@@ -51,7 +52,7 @@ void *vector_data(Vector *vector);
  *                                  MODIFIERS                                  *
  ******************************************************************************/
 
-void vector_assign(Vector *vector, void *ptrs);
+void vector_assign(Vector *vector, void **ptrs);
 void vector_push_back(Vector *vector, void *ptr);
 void vector_pop_back(Vector *vector);
 void vector_insert(Vector *vector, void *ptr, size_t index);
