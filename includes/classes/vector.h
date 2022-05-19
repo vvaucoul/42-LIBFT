@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:02:35 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/05/19 12:13:20 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:37:21 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 #define VECTOR_H
 
 #include <stdlib.h>
-
-typedef struct s_vnode
-{
-    void *data;
-    struct s_vnode *next;
-} t_vnode;
+#include <limits.h>
+#include "libft.h"
 
 typedef struct s_vector
 {
-    t_vnode *root;
+    void *root;
     size_t size;
 } t_vector;
 
-#define Vector t_vector;
+#define Vector t_vector
+
+Vector *vector_new(size_t size, size_t count);
 
 /*******************************************************************************
  *                                  CAPACITY                                   *
@@ -36,9 +34,9 @@ typedef struct s_vector
 size_t vector_size(Vector *vector);
 size_t vector_max_size(Vector *vector);
 void vector_resize(Vector *vector, size_t size);
-size_t vector_capacity(Vector *vector, size_t size);
+size_t vector_capacity(Vector *vector);
 int vector_empty(Vector *vector);
-void vector_reserve(Vector *vector);
+void vector_reserve(Vector *vector, size_t size);
 
 /*******************************************************************************
  *                              ELEMENT - ACCESS                               *
@@ -53,7 +51,7 @@ void *vector_data(Vector *vector);
  *                                  MODIFIERS                                  *
  ******************************************************************************/
 
-void vector_assign(Vector *vector, void **ptrs);
+void vector_assign(Vector *vector, void *ptrs);
 void vector_push_back(Vector *vector, void *ptr);
 void vector_pop_back(Vector *vector);
 void vector_insert(Vector *vector, void *ptr, size_t index);
