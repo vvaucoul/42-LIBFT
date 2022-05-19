@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/01/28 20:18:46 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/05/19 11:46:51 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,10 @@ SRCS =	$(wildcard srcs/*.c) \
 		$(wildcard srcs/array/*.c) \
 		$(wildcard srcs/convert/*.c) \
 		$(wildcard srcs/linked_list/*.c) \
+		$(wildcard srcs/auto-allocator/*.c) \
+		$(wildcard srcs/binary-tree/*.c) \
 
-CC = clang
+CC = gcc
 AR = ar -rc
 CFLAGS = -Wall -Wextra -g3 # -Werror # -
 OBJS = $(SRCS:.c=.o)
@@ -88,6 +90,7 @@ clean:
 		@rm -f $(OBJS)
 
 fclean: clean
+		@rm -f lft_test
 		@rm -f $(NAME)
 
 re: fclean all
@@ -95,6 +98,6 @@ re: fclean all
 test:
 	make
 	@$(PRINT_COMP) "lft_test"
-	@clang tests/main.c  -I./includes 42_PCC_LIBFT.a -o lft_test
+	@$(CC) tests/main.c  -I./includes 42_PCC_LIBFT.a -o lft_test
 
 .PHONY: all clean fclean re test

@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 17:28:36 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:29:56 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 00:13:38 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char *ft_itoa(int n)
         return (NULL);
     if (is_min_int(n, &str) == 1)
         return (str);
-    if ((isneg = ((n >= -2147483648 && n < 0) ? 1 : 0)) == 1)
+    if ((isneg = ((n >= -2147483647 && n < 0) ? 1 : 0)) == 1)
         n *= -1;
     i = (isneg ? 1 : 1);
     while (size - i >= 0)

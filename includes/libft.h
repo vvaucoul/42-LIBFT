@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 22:50:09 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:16:42 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h>
 
 #include "ft_printf.h"
+#include "auto-allocator.h"
+#include "binary-tree.h"
 
 /******************************************************************************/
 /*							         ENUMS           		                  */

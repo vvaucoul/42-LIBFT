@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 01:00:32 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 01:25:00 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/05/18 23:44:07 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define FT_PRINTF_H
 
 #include <stdarg.h>
-
 #include "libft.h"
 
 typedef struct s_printf
