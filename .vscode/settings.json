@@ -2,5 +2,6 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "string.h": "c"
-    }
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

@@ -1,0 +1,257 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/vintz/Documents/Github_Vintz/42-LIBFT'
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/print/ft_pustr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/print/ft_pustr.c -o srcs/print/ft_pustr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/print/ft_putchar.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/print/ft_putchar.c -o srcs/print/ft_putchar.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/print/ft_putendl.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/print/ft_putendl.c -o srcs/print/ft_putendl.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/print/ft_putnbr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/print/ft_putnbr.c -o srcs/print/ft_putnbr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/print/ft_putsarray.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/print/ft_putsarray.c -o srcs/print/ft_putsarray.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/number/ft_nbrlen.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/number/ft_nbrlen.c -o srcs/number/ft_nbrlen.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/printf/ft_printf.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/printf/ft_printf.c -o srcs/printf/ft_printf.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_fstrcjoin.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_fstrcjoin.c -o srcs/string/ft_fstrcjoin.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_fstrjoin.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_fstrjoin.c -o srcs/string/ft_fstrjoin.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_lentc.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_lentc.c -o srcs/string/ft_lentc.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_lents.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_lents.c -o srcs/string/ft_lents.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_multijoin.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_multijoin.c -o srcs/string/ft_multijoin.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_scof.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_scof.c -o srcs/string/ft_scof.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_sncof.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_sncof.c -o srcs/string/ft_sncof.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strchr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strchr.c -o srcs/string/ft_strchr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strcjoin.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strcjoin.c -o srcs/string/ft_strcjoin.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strcmp.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strcmp.c -o srcs/string/ft_strcmp.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strcpy.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strcpy.c -o srcs/string/ft_strcpy.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strdup.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strdup.c -o srcs/string/ft_strdup.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strjoin.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strjoin.c -o srcs/string/ft_strjoin.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strlen.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strlen.c -o srcs/string/ft_strlen.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strmapi.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strmapi.c -o srcs/string/ft_strmapi.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strncmp.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strncmp.c -o srcs/string/ft_strncmp.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strncpy.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strncpy.c -o srcs/string/ft_strncpy.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strrdbls.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strrdbls.c -o srcs/string/ft_strrdbls.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strremove.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strremove.c -o srcs/string/ft_strremove.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strrep.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strrep.c -o srcs/string/ft_strrep.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strsncmp.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strsncmp.c -o srcs/string/ft_strsncmp.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strsplit.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strsplit.c -o srcs/string/ft_strsplit.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strtrim.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strtrim.c -o srcs/string/ft_strtrim.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_strzap.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_strzap.c -o srcs/string/ft_strzap.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/string/ft_substr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/string/ft_substr.c -o srcs/string/ft_substr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_aalloc.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_aalloc.c -o srcs/alloc/ft_aalloc.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_afree.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_afree.c -o srcs/alloc/ft_afree.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_calloc.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_calloc.c -o srcs/alloc/ft_calloc.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_free.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_free.c -o srcs/alloc/ft_free.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_multifree.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_multifree.c -o srcs/alloc/ft_multifree.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/alloc/ft_realloc.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/alloc/ft_realloc.c -o srcs/alloc/ft_realloc.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_bzero.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_bzero.c -o srcs/memory/ft_bzero.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memalloc.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memalloc.c -o srcs/memory/ft_memalloc.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memchr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memchr.c -o srcs/memory/ft_memchr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memcmp.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memcmp.c -o srcs/memory/ft_memcmp.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memcpy.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memcpy.c -o srcs/memory/ft_memcpy.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memcrm.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memcrm.c -o srcs/memory/ft_memcrm.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memlower.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memlower.c -o srcs/memory/ft_memlower.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memmove.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memmove.c -o srcs/memory/ft_memmove.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memscmp.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memscmp.c -o srcs/memory/ft_memscmp.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memset.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memset.c -o srcs/memory/ft_memset.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memshr.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memshr.c -o srcs/memory/ft_memshr.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memsrm.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memsrm.c -o srcs/memory/ft_memsrm.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_memupper.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_memupper.c -o srcs/memory/ft_memupper.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_swap.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_swap.c -o srcs/memory/ft_swap.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/memory/ft_vswap.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/memory/ft_vswap.c -o srcs/memory/ft_vswap.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_ccof.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_ccof.c -o srcs/char/ft_ccof.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isalnum.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isalnum.c -o srcs/char/ft_isalnum.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isalpha.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isalpha.c -o srcs/char/ft_isalpha.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isascii.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isascii.c -o srcs/char/ft_isascii.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isdigit.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isdigit.c -o srcs/char/ft_isdigit.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_islower.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_islower.c -o srcs/char/ft_islower.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isspace.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isspace.c -o srcs/char/ft_isspace.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_isupper.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_isupper.c -o srcs/char/ft_isupper.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_tolower.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_tolower.c -o srcs/char/ft_tolower.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/char/ft_toupper.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/char/ft_toupper.c -o srcs/char/ft_toupper.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_acof.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_acof.c -o srcs/array/ft_acof.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_acol.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_acol.c -o srcs/array/ft_acol.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_acpy.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_acpy.c -o srcs/array/ft_acpy.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_alen.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_alen.c -o srcs/array/ft_alen.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_asize.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_asize.c -o srcs/array/ft_asize.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/array/ft_split.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/array/ft_split.c -o srcs/array/ft_split.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/convert/ft_atoi.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/convert/ft_atoi.c -o srcs/convert/ft_atoi.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/convert/ft_itoa.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/convert/ft_itoa.c -o srcs/convert/ft_itoa.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/convert/ft_itoa_base.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/convert/ft_itoa_base.c -o srcs/convert/ft_itoa_base.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstadd_back.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstadd_back.c -o srcs/linked_list/ft_lstadd_back.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstadd_front.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstadd_front.c -o srcs/linked_list/ft_lstadd_front.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstclear.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstclear.c -o srcs/linked_list/ft_lstclear.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstdelone.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstdelone.c -o srcs/linked_list/ft_lstdelone.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstiter.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstiter.c -o srcs/linked_list/ft_lstiter.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstlast.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstlast.c -o srcs/linked_list/ft_lstlast.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstnew.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstnew.c -o srcs/linked_list/ft_lstnew.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/linked_list/ft_lstsize.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/linked_list/ft_lstsize.c -o srcs/linked_list/ft_lstsize.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/auto-allocator/auto-allocator-utils.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/auto-allocator/auto-allocator-utils.c -o srcs/auto-allocator/auto-allocator-utils.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/auto-allocator/auto-allocator.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/auto-allocator/auto-allocator.c -o srcs/auto-allocator/auto-allocator.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/binary-tree/binary-tree.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/binary-tree/binary-tree.c -o srcs/binary-tree/binary-tree.o
+echo -n "\r                                                               "
+printf "\r\033[1m\033[37m- \033[1m\033[36m[%s]\r\t\t\t\t\t \033[1m\033[37m[✓]\n" srcs/classes/vector.o
+gcc -Wall -Wextra -g3  -I./includes -c srcs/classes/vector.c -o srcs/classes/vector.o
+ar -rc 42_PCC_LIBFT.a srcs/print/ft_pustr.o srcs/print/ft_putchar.o srcs/print/ft_putendl.o srcs/print/ft_putnbr.o srcs/print/ft_putsarray.o srcs/number/ft_nbrlen.o srcs/printf/ft_printf.o srcs/string/ft_fstrcjoin.o srcs/string/ft_fstrjoin.o srcs/string/ft_lentc.o srcs/string/ft_lents.o srcs/string/ft_multijoin.o srcs/string/ft_scof.o srcs/string/ft_sncof.o srcs/string/ft_strchr.o srcs/string/ft_strcjoin.o srcs/string/ft_strcmp.o srcs/string/ft_strcpy.o srcs/string/ft_strdup.o srcs/string/ft_strjoin.o srcs/string/ft_strlen.o srcs/string/ft_strmapi.o srcs/string/ft_strncmp.o srcs/string/ft_strncpy.o srcs/string/ft_strrdbls.o srcs/string/ft_strremove.o srcs/string/ft_strrep.o srcs/string/ft_strsncmp.o srcs/string/ft_strsplit.o srcs/string/ft_strtrim.o srcs/string/ft_strzap.o srcs/string/ft_substr.o srcs/alloc/ft_aalloc.o srcs/alloc/ft_afree.o srcs/alloc/ft_calloc.o srcs/alloc/ft_free.o srcs/alloc/ft_multifree.o srcs/alloc/ft_realloc.o srcs/memory/ft_bzero.o srcs/memory/ft_memalloc.o srcs/memory/ft_memchr.o srcs/memory/ft_memcmp.o srcs/memory/ft_memcpy.o srcs/memory/ft_memcrm.o srcs/memory/ft_memlower.o srcs/memory/ft_memmove.o srcs/memory/ft_memscmp.o srcs/memory/ft_memset.o srcs/memory/ft_memshr.o srcs/memory/ft_memsrm.o srcs/memory/ft_memupper.o srcs/memory/ft_swap.o srcs/memory/ft_vswap.o srcs/char/ft_ccof.o srcs/char/ft_isalnum.o srcs/char/ft_isalpha.o srcs/char/ft_isascii.o srcs/char/ft_isdigit.o srcs/char/ft_islower.o srcs/char/ft_isspace.o srcs/char/ft_isupper.o srcs/char/ft_tolower.o srcs/char/ft_toupper.o srcs/array/ft_acof.o srcs/array/ft_acol.o srcs/array/ft_acpy.o srcs/array/ft_alen.o srcs/array/ft_asize.o srcs/array/ft_split.o srcs/convert/ft_atoi.o srcs/convert/ft_itoa.o srcs/convert/ft_itoa_base.o srcs/linked_list/ft_lstadd_back.o srcs/linked_list/ft_lstadd_front.o srcs/linked_list/ft_lstclear.o srcs/linked_list/ft_lstdelone.o srcs/linked_list/ft_lstiter.o srcs/linked_list/ft_lstlast.o srcs/linked_list/ft_lstnew.o srcs/linked_list/ft_lstsize.o srcs/auto-allocator/auto-allocator-utils.o srcs/auto-allocator/auto-allocator.o srcs/binary-tree/binary-tree.o srcs/classes/vector.o
+make: Leaving directory '/home/vintz/Documents/Github_Vintz/42-LIBFT'
+ 
