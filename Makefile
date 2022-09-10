@@ -6,7 +6,7 @@
 #    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/09/10 01:03:22 by vvaucoul         ###   ########.fr        #
+#    Updated: 2022/09/10 10:12:51 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ include depends/Colors.mk
 ################################################################################
 
 ### PRINT UTILS ###
-PRINT_COMP		=	printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LGREEN)[%s] $(_BOLD)$(_WHITE)[✓]\n$(_MOVE_LINE_UP)"
-
+PRINT_COMP		=	printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LGREEN)[%s] $(_BOLD)$(_WHITE)[$(_LGREEN)✓$(_LWHITE)]\n$(_MOVE_LINE_UP)"
 
 ################################################################################
 #								   COMPILATION		  					 	   #
@@ -41,6 +40,7 @@ SRCS =	$(wildcard srcs/*.c) \
 		$(wildcard srcs/binary-tree/*.c) \
 		$(wildcard srcs/classes/*.c) \
 		$(wildcard srcs/dlinked_list/*.c) \
+		$(wildcard srcs/parser/*.c) \
 
 CC = gcc
 AR = ar -rc
@@ -61,7 +61,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LGREEN)[%s] $(_BOLD)$(_WHITE)[✓]\n$(_MOVE_LINE_UP)" $(NAME)
+	@printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LCYAN)[%s] $(_WHITE)Compiled ! $(_BOLD)$(_WHITE)[$(_LGREEN)✓$(_LWHITE)]\n" $(NAME)
 
 clean:
 	@rm -f $(OBJS) $(DEPENDS)
@@ -73,8 +73,8 @@ fclean: clean
 re: fclean all
 
 test: $(NAME)
-	@$(PRINT_COMP) "lft_test"
 	@$(CC) tests/main.c  -I./includes 42_PCC_LIBFT.a -o lft_test
+	@printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LCYAN)[%s] $(_WHITE)Compiled ! $(_BOLD)$(_WHITE)[$(_LGREEN)✓$(_LWHITE)]\n" "lft_test"
 
 -include $(DEPENDS)
 

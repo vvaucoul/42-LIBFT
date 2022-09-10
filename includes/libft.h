@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/09/10 00:58:50 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:03:15 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char *ft_strdup(const char *str);
 size_t ft_strlen(const char *str);
 int ft_strcmp(const char *str, const char *str2);
 int ft_strncmp(const char *str, const char *str2, size_t len);
-char *ft_strcpy(const char *str);
+char *ft_strcpy(char *dest, const char *str);
 char *ft_strncpy(const char *str, size_t len);
 char *ft_strchr(const char *str, int c);
 char *ft_strjoin(const char *str, const char *join);

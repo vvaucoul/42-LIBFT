@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_sscanf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 01:26:11 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 01:26:47 by vvaucoul         ###   ########.fr       */
+/*   Created: 2022/09/10 10:48:01 by vvaucoul          #+#    #+#             */
+/*   Updated: 2022/09/10 10:49:33 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t ft_strlen(const char *str)
+int ft_sscanf(const char *str, const char *format, ...)
 {
-    size_t i = 0;
-
-    while (str[i])
-        ++i;
-    return (i);
+    (void)str;
+    (void)format;
+    return (0);
 }

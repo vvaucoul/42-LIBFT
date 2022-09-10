@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 19:25:49 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 19:42:27 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:03:51 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char **ft_acpy(const char **arr)
         return (NULL);
     for (size_t i = 0; arr[i]; ++i)
     {
-        new_array[i] = ft_strcpy(arr[i]);
+        new_array[i] = ft_strcpy(new_array[i], arr[i]);
         new_array[i + 1] = NULL;
     }
     return (new_array);
