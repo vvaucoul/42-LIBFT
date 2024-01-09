@@ -1,7 +1,26 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "string.h": "c"
+        "*.s": "nasm",
+        "*.ld": "mapfile",
+        "string.h": "c",
+        "libft.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "random": "c",
+        "algorithm": "c",
+        "concepts": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "unordered_map": "c",
+        "memory": "c",
+        "ostream": "c",
+        "streambuf": "c",
+        "functional": "c"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

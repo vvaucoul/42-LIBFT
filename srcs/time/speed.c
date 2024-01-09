@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_afree.c                                         :+:      :+:    :+:   */
+/*   speed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 17:22:00 by vvaucoul          #+#    #+#             */
-/*   Updated: 2024/01/09 01:45:37 by vvaucoul         ###   ########.fr       */
+/*   Created: 2024/01/09 00:59:23 by vvaucoul          #+#    #+#             */
+/*   Updated: 2024/01/09 01:06:16 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
-void ft_afree(void **ptr, size_t size)
-{
-    size_t i;
+// Function to start the timer
+void startTimer(clock_t *start) {
+    *start = clock();
+}
 
-    i = 0;
-    while (i < size)
-    {
-        free(ptr[i]);
-        ++i;
-    }
-    free(ptr);
+// Function to stop the timer and calculate the elapsed time
+double stopTimer(clock_t start) {
+    clock_t end = clock();
+    double elapsedTime = (double)(end - start) / CLOCKS_PER_SEC;
+    return elapsedTime;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
+#    By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 18:52:08 by vvaucoul          #+#    #+#              #
-#    Updated: 2022/09/10 10:12:51 by vvaucoul         ###   ########.fr        #
+#    Updated: 2024/01/09 00:54:54 by vvaucoul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,22 +25,7 @@ PRINT_COMP		=	printf "$(_CLEAR_LINE)$(_BOLD)$(_WHITE)- $(_BOLD)$(_LGREEN)[%s] $(
 
 NAME = 42_PCC_LIBFT.a
 
-SRCS =	$(wildcard srcs/*.c) \
-		$(wildcard srcs/print/*.c) \
-		$(wildcard srcs/number/*.c) \
-		$(wildcard srcs/printf/*.c) \
-		$(wildcard srcs/string/*.c) \
-		$(wildcard srcs/alloc/*.c) \
-		$(wildcard srcs/memory/*.c) \
-		$(wildcard srcs/char/*.c) \
-		$(wildcard srcs/array/*.c) \
-		$(wildcard srcs/convert/*.c) \
-		$(wildcard srcs/linked_list/*.c) \
-		$(wildcard srcs/auto-allocator/*.c) \
-		$(wildcard srcs/binary-tree/*.c) \
-		$(wildcard srcs/classes/*.c) \
-		$(wildcard srcs/dlinked_list/*.c) \
-		$(wildcard srcs/parser/*.c) \
+SRCS = $(shell find srcs -name '*.c')
 
 CC = gcc
 AR = ar -rc
