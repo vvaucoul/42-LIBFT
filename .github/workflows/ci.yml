@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build 42_PCC_LIBFT.a
+        run: make
+
+      - name: Norm check (informational)
+        continue-on-error: true
+        run: make norm
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and run test suite
+        id: run_tests
+        continue-on-error: true
+        run: make test | tee test-output.log
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output
+          path: test-output.log
+
+      - name: Report outcome
+        run: |
+          if [ "${{ steps.run_tests.outcome }}" = "failure" ]; then
+            echo "::warning::Some tests failed - this repo's suite intentionally documents known bugs in srcs/ (tests named *_known_bug), so a non-zero exit here is expected, not a CI regression by itself. Compare against test-output.log / previous runs to spot NEW failures."
+          fi
+
+  sanitizers:
+    name: Sanitized test run (ASan + UBSan)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and run under sanitizers
+        continue-on-error: true
+        run: make san | tee sanitizer-output.log
+
+      - name: Upload sanitizer log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanitizer-output
+          path: sanitizer-output.log

@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# Test binary and sandbox artifacts
+/lft_test
+/tests/sandbox/
+
 # Object files
 *.o
 *.ko
