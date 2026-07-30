@@ -1,5 +1,13 @@
 /* ************************************************************************** */
-/*   test_char.c - srcs/char/ *.c                                             */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_char.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
@@ -84,18 +92,16 @@ TEST(char, isupper_islower)
 	ASSERT(ft_islower('9') == false);
 }
 
-/* ft_isspace only recognizes ' ' (0x20) - unlike the standard C isspace()
-** it does NOT treat \t \n \v \f \r as whitespace. Documenting the actual
-** implemented behavior here, not the libc contract. */
-TEST(char, isspace_space_only)
+TEST(char, isspace_matches_libc_whitespace)
 {
 	ASSERT(ft_isspace(' ') == true);
-	ASSERT(ft_isspace('\t') == false);
-	ASSERT(ft_isspace('\n') == false);
-	ASSERT(ft_isspace('\v') == false);
-	ASSERT(ft_isspace('\f') == false);
-	ASSERT(ft_isspace('\r') == false);
+	ASSERT(ft_isspace('\t') == true);
+	ASSERT(ft_isspace('\n') == true);
+	ASSERT(ft_isspace('\v') == true);
+	ASSERT(ft_isspace('\f') == true);
+	ASSERT(ft_isspace('\r') == true);
 	ASSERT(ft_isspace('a') == false);
+	ASSERT(ft_isspace('0') == false);
 }
 
 TEST(char, toupper_tolower)
@@ -118,4 +124,54 @@ TEST(char, ccof_found_and_not_found)
 	ASSERT(ft_ccof('z', "abc") == false);
 	ASSERT(ft_ccof('a', "") == false);
 	ASSERT(ft_ccof('a', NULL) == false);
+}
+
+TEST(char, isxdigit_hex_digits)
+{
+	ASSERT(ft_isxdigit('0') == true);
+	ASSERT(ft_isxdigit('9') == true);
+	ASSERT(ft_isxdigit('a') == true);
+	ASSERT(ft_isxdigit('f') == true);
+	ASSERT(ft_isxdigit('A') == true);
+	ASSERT(ft_isxdigit('F') == true);
+	ASSERT(ft_isxdigit('g') == false);
+	ASSERT(ft_isxdigit('G') == false);
+	ASSERT(ft_isxdigit(' ') == false);
+}
+
+TEST(char, iscntrl_control_characters)
+{
+	ASSERT(ft_iscntrl('\0') == true);
+	ASSERT(ft_iscntrl('\n') == true);
+	ASSERT(ft_iscntrl('\t') == true);
+	ASSERT(ft_iscntrl(127) == true);
+	ASSERT(ft_iscntrl('a') == false);
+	ASSERT(ft_iscntrl(' ') == false);
+}
+
+TEST(char, isprint_printable_including_space)
+{
+	ASSERT(ft_isprint(' ') == true);
+	ASSERT(ft_isprint('a') == true);
+	ASSERT(ft_isprint('~') == true);
+	ASSERT(ft_isprint('\n') == false);
+	ASSERT(ft_isprint(127) == false);
+}
+
+TEST(char, isgraph_printable_excluding_space)
+{
+	ASSERT(ft_isgraph('a') == true);
+	ASSERT(ft_isgraph('!') == true);
+	ASSERT(ft_isgraph(' ') == false);
+	ASSERT(ft_isgraph('\n') == false);
+}
+
+TEST(char, ispunct_punctuation_only)
+{
+	ASSERT(ft_ispunct('.') == true);
+	ASSERT(ft_ispunct(',') == true);
+	ASSERT(ft_ispunct('!') == true);
+	ASSERT(ft_ispunct('a') == false);
+	ASSERT(ft_ispunct('5') == false);
+	ASSERT(ft_ispunct(' ') == false);
 }

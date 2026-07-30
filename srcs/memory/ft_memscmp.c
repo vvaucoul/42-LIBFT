@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memscmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 10:30:40 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 10:36:21 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start)
 {
-    unsigned char *tmp_ptr = (unsigned char *)ptr;
-    unsigned char *tmp_cmp = (unsigned char *)ptr_cmp;
+    const unsigned char *tmp_ptr;
+    const unsigned char *tmp_cmp;
+    size_t i;
 
-    while (start--)
+    if (start > len)
+        return (0);
+    tmp_ptr = (const unsigned char *)ptr + start;
+    tmp_cmp = (const unsigned char *)ptr_cmp + start;
+    len -= start;
+    i = 0;
+    while (i < len)
     {
-        ++tmp_ptr;
-        ++tmp_cmp;
-        --len;
-    }
-    while (--len)
-    {
-        if (*tmp_ptr != *tmp_cmp)
-            return (*tmp_ptr - *tmp_cmp);
-        else
-        {
-            ++tmp_ptr;
-            ++tmp_cmp;
-        }
+        if (tmp_ptr[i] != tmp_cmp[i])
+            return ((int)tmp_ptr[i] - (int)tmp_cmp[i]);
+        ++i;
     }
     return (0);
 }

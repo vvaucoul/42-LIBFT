@@ -1,5 +1,13 @@
 /* ************************************************************************** */
-/*   test_convert.c - srcs/convert/ *.c (ft_atoi, ft_itoa, ft_itoa_base)      */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_convert.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
@@ -72,19 +80,14 @@ TEST(convert, itoa_int_max)
 	free(s);
 }
 
-/* ft_itoa(INT_MIN) special-cases via is_min_int(), which routes through the
-** buggy ft_strdup (allocates strlen() bytes with no room for the NUL
-** terminator). Kept as its own test so a crash/garbage read here doesn't
-** take down the rest of the convert suite (fork isolation). */
-TEST(convert, itoa_int_min_known_bug)
+TEST(convert, itoa_int_min)
 {
 	char *s;
 
 	s = ft_itoa(-2147483648);
 	ASSERT_NOT_NULL(s);
-	ASSERT_MSG(!strncmp(s, "-2147483648", 11),
-		"ft_itoa(INT_MIN) should start with \"-2147483648\", got \"%.11s\"",
-		s);
+	ASSERT_EQ_STR(s, "-2147483648");
+	free(s);
 }
 
 TEST(convert, itoa_base_binary)
@@ -93,12 +96,15 @@ TEST(convert, itoa_base_binary)
 
 	s = ft_itoa_base(0, 2);
 	ASSERT_EQ_STR(s, "0");
+	free(s);
 
 	s = ft_itoa_base(5, 2);
 	ASSERT_EQ_STR(s, "101");
+	free(s);
 
 	s = ft_itoa_base(255, 2);
 	ASSERT_EQ_STR(s, "11111111");
+	free(s);
 }
 
 TEST(convert, itoa_base_octal_decimal_hex)
@@ -107,15 +113,19 @@ TEST(convert, itoa_base_octal_decimal_hex)
 
 	s = ft_itoa_base(8, 8);
 	ASSERT_EQ_STR(s, "10");
+	free(s);
 
 	s = ft_itoa_base(42, 10);
 	ASSERT_EQ_STR(s, "42");
+	free(s);
 
 	s = ft_itoa_base(255, 16);
 	ASSERT_EQ_STR(s, "ff");
+	free(s);
 
 	s = ft_itoa_base(4096, 16);
 	ASSERT_EQ_STR(s, "1000");
+	free(s);
 }
 
 TEST(convert, itoa_base_invalid_base_returns_null)
@@ -126,19 +136,127 @@ TEST(convert, itoa_base_invalid_base_returns_null)
 	ASSERT_NULL(ft_itoa_base(10, -5));
 }
 
-/* Negative numbers in ft_itoa_base always go through ft_itoa_neg_base(),
-** which ignores `base` entirely and hardcodes an 8-char two's-complement-like
-** hex string built on top of a strdup("ffffffff") buffer that is 1 byte too
-** small for its own NUL terminator - the result is never NUL-terminated.
-** We only assert on the bytes that are documented to be written (the first
-** 8), and never index/print past that to stay inside the (buggy) allocation. */
-TEST(convert, itoa_base_negative_known_bug)
+TEST(convert, itoa_base_negative_uses_sign_and_magnitude)
 {
 	char *s;
 
 	s = ft_itoa_base(-1, 16);
-	ASSERT_NOT_NULL(s);
-	ASSERT_MSG(!strncmp(s, "ffffffff", 8),
-		"ft_itoa_base(-1, 16): expected two's-complement \"ffffffff\" "
-		"prefix, got \"%.8s\"", s);
+	ASSERT_EQ_STR(s, "-1");
+	free(s);
+
+	s = ft_itoa_base(-5, 2);
+	ASSERT_EQ_STR(s, "-101");
+	free(s);
+
+	s = ft_itoa_base(-255, 16);
+	ASSERT_EQ_STR(s, "-ff");
+	free(s);
+}
+
+TEST(convert, itoa_base_int_min_every_base)
+{
+	char *s;
+
+	s = ft_itoa_base(-2147483648, 10);
+	ASSERT_EQ_STR(s, "-2147483648");
+	free(s);
+
+	s = ft_itoa_base(-2147483648, 16);
+	ASSERT_EQ_STR(s, "-80000000");
+	free(s);
+}
+
+TEST(convert, atoi_base_round_trips_with_itoa_base)
+{
+	ASSERT_EQ_INT(ft_atoi_base("101", 2), 5);
+	ASSERT_EQ_INT(ft_atoi_base("ff", 16), 255);
+	ASSERT_EQ_INT(ft_atoi_base("-2a", 16), -42);
+	ASSERT_EQ_INT(ft_atoi_base("777", 8), 511);
+}
+
+TEST(convert, atoi_base_invalid_base_returns_zero)
+{
+	ASSERT_EQ_INT(ft_atoi_base("101", 1), 0);
+	ASSERT_EQ_INT(ft_atoi_base("101", 17), 0);
+	ASSERT_EQ_INT(ft_atoi_base(NULL, 16), 0);
+}
+
+TEST(convert, atoi_base_stops_at_first_invalid_digit)
+{
+	ASSERT_EQ_INT(ft_atoi_base("1g", 16), 1);
+	ASSERT_EQ_INT(ft_atoi_base("12", 2), 1);
+}
+
+TEST(convert, atol_basic)
+{
+	ASSERT_EQ_INT(ft_atol("42"), 42);
+	ASSERT_EQ_INT(ft_atol("-42"), -42);
+	ASSERT_EQ_INT(ft_atol("   +7"), 7);
+	ASSERT_EQ_INT(ft_atol("abc"), 0);
+}
+
+TEST(convert, atoll_basic)
+{
+	ASSERT_EQ_INT(ft_atoll("42"), 42);
+	ASSERT_EQ_INT(ft_atoll("-42"), -42);
+	ASSERT_EQ_INT(ft_atoll("9223372036854775807"), 9223372036854775807LL);
+}
+
+TEST(convert, lltoa_basic)
+{
+	char *s;
+
+	s = ft_lltoa(0);
+	ASSERT_EQ_STR(s, "0");
+	free(s);
+
+	s = ft_lltoa(-42);
+	ASSERT_EQ_STR(s, "-42");
+	free(s);
+
+	s = ft_lltoa(9223372036854775807LL);
+	ASSERT_EQ_STR(s, "9223372036854775807");
+	free(s);
+}
+
+TEST(convert, lltoa_llong_min)
+{
+	char *s = ft_lltoa(-9223372036854775807LL - 1);
+
+	ASSERT_EQ_STR(s, "-9223372036854775808");
+	free(s);
+}
+
+TEST(convert, lltoa_atoll_round_trip)
+{
+	char *s = ft_lltoa(123456789012345LL);
+
+	ASSERT_EQ_INT(ft_atoll(s), 123456789012345LL);
+	free(s);
+}
+
+TEST(convert, atof_integer_and_sign)
+{
+	ASSERT_EQ_DOUBLE(ft_atof("42"), 42.0, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("-42"), -42.0, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("+42"), 42.0, 0.0001);
+}
+
+TEST(convert, atof_fractional_part)
+{
+	ASSERT_EQ_DOUBLE(ft_atof("3.14"), 3.14, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("-0.5"), -0.5, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("0.001"), 0.001, 0.00001);
+}
+
+TEST(convert, atof_exponent_notation)
+{
+	ASSERT_EQ_DOUBLE(ft_atof("1e2"), 100.0, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("1.5e-2"), 0.015, 0.0001);
+	ASSERT_EQ_DOUBLE(ft_atof("2E3"), 2000.0, 0.0001);
+}
+
+TEST(convert, atof_null_returns_zero)
+{
+	ASSERT_EQ_DOUBLE(ft_atof(NULL), 0.0, 0.0001);
 }

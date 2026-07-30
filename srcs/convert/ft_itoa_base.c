@@ -3,94 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 17:30:02 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 17:30:20 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char *ft_itoa_neg_base(int nb, int base)
+/* Magnitude computed in unsigned arithmetic to avoid signed overflow
+** when negating INT_MIN. */
+static unsigned int int_magnitude(int nb)
 {
-    unsigned int tmp_nb;
-    char *str_base;
-    char *final_nb;
-    int nb_count;
-    int i;
-
-    tmp_nb = nb;
-    str_base = ft_strdup("0123456789abcdef");
-    nb_count = 8;
-    final_nb = ft_strdup("ffffffff");
-    i = 1;
-    while (tmp_nb)
-    {
-        final_nb[nb_count - i] = str_base[tmp_nb % base];
-        tmp_nb /= base;
-        ++i;
-    }
-    free(str_base);
-    return (final_nb);
+    if (nb == -2147483648)
+        return (2147483648u);
+    if (nb < 0)
+        return ((unsigned int)(-nb));
+    return ((unsigned int)nb);
 }
 
-static int ft_intlen_base(int nb, int base)
+static size_t magnitude_len_base(unsigned int magnitude, unsigned int base)
 {
-    int len;
+    size_t len;
 
+    if (magnitude == 0)
+        return (1);
     len = 0;
-    while (nb)
+    while (magnitude)
     {
-        nb /= base;
+        magnitude /= base;
         ++len;
     }
     return (len);
 }
 
-static char *ft_calcul_base(int nb, int base, int is_neg)
-{
-    char *str_base;
-    char *final_nb;
-    int nb_count;
-    int i;
-
-    str_base = ft_strdup("0123456789abcdef");
-    nb_count = ft_intlen_base(nb, base);
-    nb_count += is_neg == 1 ? 1 : 0;
-    final_nb = malloc(sizeof(char) * nb_count + 1);
-    i = 1;
-    is_neg == 1 ? (final_nb[0] = '-') : 0;
-    while (nb)
-    {
-        final_nb[nb_count - i] = str_base[nb % base];
-        nb /= base;
-        ++i;
-    }
-    final_nb[nb_count] = '\0';
-    free(str_base);
-    return (final_nb);
-}
-
 char *ft_itoa_base(int nb, int base)
 {
+    static const char digits[] = "0123456789abcdef";
+    unsigned int magnitude;
+    size_t len;
+    size_t pos;
+    char *str;
     int is_neg;
 
-    is_neg = 0;
     if (base < 2 || base > 16)
-        return (0);
-    if (base == 10 && nb == -2147483648)
-        return ("-2147483648");
-    if (nb == 0)
-        return ("0");
-    if (nb < 0)
+        return (NULL);
+    is_neg = (nb < 0);
+    magnitude = int_magnitude(nb);
+    len = magnitude_len_base(magnitude, (unsigned int)base);
+    if (!(str = malloc(len + is_neg + 1)))
+        return (NULL);
+    pos = len + is_neg;
+    str[pos] = '\0';
+    if (magnitude == 0)
+        str[--pos] = '0';
+    while (magnitude)
     {
-        return (ft_itoa_neg_base(nb, base));
-        nb *= -1;
-        if (base == 10)
-            is_neg = 1;
+        str[--pos] = digits[magnitude % (unsigned int)base];
+        magnitude /= (unsigned int)base;
     }
-    else
-        is_neg = 0;
-    return (ft_calcul_base(nb, base, is_neg));
+    if (is_neg)
+        str[0] = '-';
+    return (str);
 }

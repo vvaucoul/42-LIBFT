@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary-tree.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 11:15:02 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/09/10 00:58:56 by vvaucoul         ###   ########.fr       */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct s_t_node
+typedef struct s_bt_node
 {
-    void *data;
-    struct s_t_node *left;
-    struct s_t_node *right;
-} t_t_node;
-
-#define T_NODE t_t_node
+    void                *data;
+    struct s_bt_node    *left;
+    struct s_bt_node    *right;
+}   t_bt_node;
 
 typedef struct s_bt
 {
-    T_NODE *root;
-    size_t node_size;
-} t_bt;
-
-#define T_BT t_bt
-
-extern T_BT _g_bt;
+    t_bt_node   *root;
+    CompareFunc compare;
+    size_t      size;
+}   t_bt;
 
 /*******************************************************************************
  *                           BINARY_TREE - FUNCTIONS                           *
  ******************************************************************************/
 
-T_NODE *BT_new_node(void *data);
-T_NODE *BT_insert_node(T_NODE *root, void *data);
-T_NODE *BT_get_root(void);
-size_t BT_get_node_size(void);
-void BT_display_nodes(T_NODE *node);
-void *BT_delete_node(T_NODE *root, void *data, int delete_data);
-void BT_delete_tree(T_NODE *root, int delete_data);
+t_bt        *BT_create(CompareFunc compare);
+void        BT_insert(t_bt *tree, void *data);
+void        *BT_delete(t_bt *tree, void *key, bool free_data);
+t_bt_node   *BT_search(t_bt *tree, void *key);
+bool        BT_contains(t_bt *tree, void *key);
+t_bt_node   *BT_min_node(t_bt_node *node);
+t_bt_node   *BT_max_node(t_bt_node *node);
+size_t      BT_size(t_bt *tree);
+size_t      BT_height(t_bt *tree);
+bool        BT_is_empty(t_bt *tree);
+bool        BT_is_valid(t_bt *tree);
+void        BT_free(t_bt *tree, bool free_data);
+void        BT_display_nodes(t_bt *tree, void (*print_data)(void *));
 
 #endif

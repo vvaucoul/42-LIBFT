@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   main.c - test runner entry point                                        */
-/*                                                                            */
-/*   All actual test cases live in tests/test_*.c and self-register via the  */
-/*   TEST(suite, name) { ... } macro from tests/framework/test_framework.h - */
-/*   nothing to list/wire up here. Add a new tests/test_whatever.c file and  */
-/*   it is picked up automatically by the Makefile (`find tests -name       */
-/*   '*.c'`) and by the constructor-based auto-registration at startup.     */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,8 +1,17 @@
 /* ************************************************************************** */
-/*   test_alloc.c - srcs/alloc/ *.c                                           */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_alloc.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <string.h>
 #include "framework/test_framework.h"
 
 TEST(alloc, calloc_zero_initializes)
@@ -25,14 +34,7 @@ TEST(alloc, calloc_usable_for_requested_count)
 	free(p);
 }
 
-/* ft_calloc allocates malloc(sizeof(size_t) * (count + 1)) - the `size`
-** argument itself is never used to size the allocation, only `count` is.
-** For size <= sizeof(size_t) (8 on 64-bit) this just over-allocates
-** harmlessly; for an element size > 8 bytes it under-allocates relative to
-** what a real calloc(size, count) contract promises. This test documents
-** the bug without relying on a crash (heap slack usually hides it in a
-** non-sanitized build - run `make asan` to see it as a real heap overflow). */
-TEST(alloc, calloc_ignores_size_for_large_elements_known_bug)
+TEST(alloc, calloc_works_for_large_elements)
 {
 	typedef struct { long a; long b; long c; long d; } t_big;
 	t_big *arr = ft_calloc(sizeof(t_big), 2);
@@ -45,24 +47,69 @@ TEST(alloc, calloc_ignores_size_for_large_elements_known_bug)
 	free(arr);
 }
 
+/* Frees a chunk of the exact same size right before allocating it, so glibc's
+** tcache hands back the same (dirtied) memory and a partial zero-fill would show. */
+TEST(alloc, calloc_zero_fills_every_element_not_just_a_prefix)
+{
+	size_t total = sizeof(int) * (10 + 1);
+	void *dirty = malloc(total);
+
+	memset(dirty, 0xAA, total);
+	free(dirty);
+
+	int *arr = ft_calloc(sizeof(int), 10);
+	ASSERT_NOT_NULL(arr);
+	for (int i = 0; i < 10; ++i)
+		ASSERT_MSG(arr[i] == 0,
+			"ft_calloc(sizeof(int), 10)[%d] should be 0, got %d - the "
+			"zero-fill must cover size * (count + 1) bytes, not just "
+			"count + 1 raw bytes", i, arr[i]);
+	free(arr);
+}
+
+TEST(alloc, calloc_zero_size_or_count_is_safe)
+{
+	void *p;
+
+	p = ft_calloc(0, 10);
+	free(p);
+	p = ft_calloc(sizeof(int), 0);
+	ASSERT_NOT_NULL(p);
+	free(p);
+}
+
+TEST(alloc, calloc_overflow_returns_null)
+{
+	ASSERT_NULL(ft_calloc((size_t)-1, (size_t)-1));
+}
+
+TEST(alloc, free_nulls_the_callers_pointer)
+{
+	char *p = malloc(4);
+
+	ft_free((void **)&p);
+	ASSERT_NULL(p);
+}
+
 TEST(alloc, free_null_is_safe)
 {
 	ft_free(NULL);
 }
 
-TEST(alloc, free_valid_pointer)
+TEST(alloc, free_pointer_to_null_is_safe)
 {
-	char *p = malloc(4);
+	char *p = NULL;
 
-	ft_free(p);
+	ft_free((void **)&p);
+	ASSERT_NULL(p);
 }
 
-TEST(alloc, multifree_null_array_is_safe)
+TEST(alloc, free_each_null_array_is_safe)
 {
-	ft_multifree(NULL);
+	ft_free_each(NULL);
 }
 
-TEST(alloc, multifree_frees_each_entry)
+TEST(alloc, free_each_frees_and_nulls_every_entry)
 {
 	void *ptrs[4];
 
@@ -70,37 +117,30 @@ TEST(alloc, multifree_frees_each_entry)
 	ptrs[1] = malloc(4);
 	ptrs[2] = malloc(4);
 	ptrs[3] = NULL;
-	ft_multifree(ptrs);
+	ft_free_each(ptrs);
+	ASSERT_NULL(ptrs[0]);
+	ASSERT_NULL(ptrs[1]);
+	ASSERT_NULL(ptrs[2]);
 }
 
-TEST(alloc, afree_frees_n_entries_and_array)
+TEST(alloc, free_array_null_array_is_safe)
+{
+	ft_free_array(NULL, 3);
+}
+
+TEST(alloc, free_array_frees_n_entries_and_array)
 {
 	void **ptrs = malloc(sizeof(void *) * 3);
 
 	ptrs[0] = malloc(4);
 	ptrs[1] = malloc(4);
 	ptrs[2] = malloc(4);
-	ft_afree(ptrs, 3);
+	ft_free_array(ptrs, 3);
 }
 
-/* ft_acol's inner cursor `j` is never reset between rows (see the matching
-** ft_asize note in test_array.c) - only safe/deterministic to assert on
-** for rows of non-decreasing length. */
-TEST(alloc, acol_longest_string_plus_one)
+TEST(alloc, alloc_2d_grid_is_writable)
 {
-	const char *arr[] = {"a", "abc", "abcd", NULL};
-
-	ASSERT_EQ_UINT(ft_acol(arr), 5);
-}
-
-TEST(alloc, acol_null_array)
-{
-	ASSERT_EQ_UINT(ft_acol(NULL), 0);
-}
-
-TEST(alloc, aalloc_grid_is_writable)
-{
-	void **grid = ft_aalloc(sizeof(char), 4, 3);
+	void **grid = ft_alloc_2d(sizeof(char), 4, 3);
 
 	ASSERT_NOT_NULL(grid);
 	for (size_t y = 0; y < 3; ++y)
@@ -108,9 +148,30 @@ TEST(alloc, aalloc_grid_is_writable)
 		ASSERT_NOT_NULL(grid[y]);
 		((char *)grid[y])[0] = 'x';
 	}
-	for (size_t y = 0; y < 3; ++y)
-		free(grid[y]);
-	free(grid);
+	ft_free_array(grid, 3);
+}
+
+TEST(alloc, alloc_2d_grid_with_element_size_smaller_than_pointer)
+{
+	void **grid = ft_alloc_2d(sizeof(char), 8, 16);
+	size_t y;
+
+	ASSERT_NOT_NULL(grid);
+	y = 0;
+	while (y < 16)
+	{
+		ASSERT_NOT_NULL(grid[y]);
+		memset(grid[y], 'A' + (int)y, 8);
+		++y;
+	}
+	ASSERT_NULL(grid[16]);
+	y = 0;
+	while (y < 16)
+	{
+		ASSERT_EQ_INT(((char *)grid[y])[0], 'A' + (int)y);
+		++y;
+	}
+	ft_free_array(grid, 16);
 }
 
 TEST(alloc, realloc_from_null_behaves_like_malloc)
@@ -123,20 +184,24 @@ TEST(alloc, realloc_from_null_behaves_like_malloc)
 	free(p);
 }
 
-/* ft_realloc treats `cursize` as sizeof(ptr) (always 8, the pointer's own
-** size), not the real old allocation size, so growing past 8 bytes only
-** ever memcpy's the first 8 bytes of the previous content - everything
-** after byte 8 is lost/uninitialized in the new block. */
-TEST(alloc, realloc_grow_past_8_bytes_loses_data_known_bug)
+TEST(alloc, realloc_grow_preserves_all_original_bytes)
 {
 	char *p = ft_realloc(NULL, 12);
 
 	memcpy(p, "abcdefghijkl", 12);
 	p = ft_realloc(p, 32);
 	ASSERT_NOT_NULL(p);
-	ASSERT_MSG(!memcmp(p, "abcdefghijkl", 12),
-		"ft_realloc(p, 32) should preserve all 12 original bytes, but "
-		"`cursize = sizeof(ptr)` (always 8) only copies the first 8: "
-		"got \"%.12s\"", p);
+	ASSERT_EQ_MEM(p, "abcdefghijkl", 12);
+	free(p);
+}
+
+TEST(alloc, realloc_shrink_preserves_truncated_prefix)
+{
+	char *p = ft_realloc(NULL, 16);
+
+	memcpy(p, "abcdefghijklmnop", 16);
+	p = ft_realloc(p, 4);
+	ASSERT_NOT_NULL(p);
+	ASSERT_EQ_MEM(p, "abcd", 4);
 	free(p);
 }

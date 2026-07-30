@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   test_framework.h - tiny self-registering, fork-isolated unit test kit   */
-/*                                                                            */
-/*   Each TEST(suite, name) { ... } block auto-registers itself (constructor */
-/*   attribute) - no manual list of test files to maintain. test_run_all()   */
-/*   forks a fresh child per test with a hard timeout, so a segfault or an   */
-/*   infinite loop in the function under test only kills that one test.     */
+/*                                                        :::      ::::::::   */
+/*   test_framework.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

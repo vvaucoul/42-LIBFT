@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memlower.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 01:50:42 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/01/28 02:09:26 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void *ft_memlower(void *ptr, size_t len)
 {
-    unsigned char *tmp_ptr = ptr;
+    unsigned char *tmp_ptr;
+    size_t i;
 
-    while (len--)
+    tmp_ptr = ptr;
+    i = 0;
+    while (i < len)
     {
-        if (ft_isupper(*tmp_ptr))
-        {
-            *(tmp_ptr) = ft_tolower(*tmp_ptr);
-            (tmp_ptr++);
-        }
+        if (ft_isupper(tmp_ptr[i]))
+            tmp_ptr[i] = ft_tolower(tmp_ptr[i]);
+        ++i;
     }
     return (ptr);
 }

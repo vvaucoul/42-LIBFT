@@ -8,10 +8,8 @@
 #                                    TOOLS                                    #
 ################################################################################
 
-# NOT `?=`: GNU Make predefines CC ("cc"), AR ("ar") and ARFLAGS ("rv",
-# verbose) itself as part of its built-in implicit-rule database, so a
-# conditional assignment here would silently never take effect - command
-# line overrides (`make CC=clang`) still win over `:=` regardless.
+# `:=` not `?=`: Make's built-in implicit rules already predefine these,
+# so `?=` would never take effect; `make CC=clang` still overrides `:=`.
 CC       := gcc
 AR       := ar
 ARFLAGS  := rcs
@@ -67,6 +65,10 @@ endif
 # Usage: make san SANITIZE=address,undefined  (asan/ubsan/san already set this)
 SANITIZE ?=
 SANFLAGS := $(if $(SANITIZE),-fsanitize=$(SANITIZE) -fno-omit-frame-pointer -g3,)
+# ASan's use-after-return detection moves stack locals to a heap-backed
+# "fake stack", which the gc module's conservative stack scan can't see -
+# disabled here so gc_collect() keeps finding real stack-resident roots.
+SANFLAGS += $(if $(findstring address,$(SANITIZE)),--param=asan-use-after-return=0,)
 
 CFLAGS := $(WARN) $(OPT) $(SANFLAGS) $(EXTRA_CFLAGS)
 

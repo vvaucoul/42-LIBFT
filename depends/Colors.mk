@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Colors.mk                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+         #
+#    By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 00:59:41 by vvaucoul          #+#    #+#              #
 #    Updated: 2022/09/10 01:01:47 by vvaucoul         ###   ########.fr        #

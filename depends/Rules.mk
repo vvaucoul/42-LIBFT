@@ -7,9 +7,8 @@
 TOTAL_OBJS := $(words $(OBJS))
 COUNT_FILE := $(OBJ_DIR)/.count
 
-# flock-guarded counter so `make -jN` prints correct "[i/total]" progress
-# instead of racing (srcs/ itself is never touched - everything lands in
-# $(BUILD_DIR), so `make fclean` is just one `rm -rf`).
+# flock-guarded counter so `make -jN` prints a correct "[i/total]" progress
+# line instead of racing.
 define COMPILE_STEP
 $(MKDIR) $(dir $@) $(dir $(COUNT_FILE))
 n=$$(flock $(COUNT_FILE).lock -c ' \

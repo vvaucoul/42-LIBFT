@@ -6,7 +6,7 @@
 /*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:56:52 by vvaucoul          #+#    #+#             */
-/*   Updated: 2024/01/09 01:45:47 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "auto-allocator.h"
-#include "binary-tree.h"
-#include "ft_printf.h"
-
-#include "classes/vector.h"
-
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      TYPES                                     ||
 // ! ||--------------------------------------------------------------------------------||
 
+// Declared before the sub-header includes below: binary-tree.h needs both
+// CompareFunc and bool for its generic, comparator-based API.
 typedef int (*CompareFunc)(const void *, const void *);
-
-// ! ||--------------------------------------------------------------------------------||
-// ! ||                                      ENUMS                                     ||
-// ! ||--------------------------------------------------------------------------------||
 
 typedef enum {
     false,
     true
 } bool;
+
+#include "gc.h"
+#include "binary-tree.h"
+#include "ft_stdio.h"
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                      ENUMS                                     ||
+// ! ||--------------------------------------------------------------------------------||
 
 typedef enum { RED,
                BLACK
@@ -66,46 +66,62 @@ typedef struct Node {
 
 typedef struct RBTree {
     Node *root;
+    Node *nil;      // shared black sentinel leaf (never NULL once created)
     CompareFunc compare;
+    size_t size;
 } RBTree;
+
+// Container headers are included here (rather than near the top of this
+// file) because several of them need t_dlist/RBTree, both declared just above.
+#include "containers/pair.h"
+#include "containers/vector.h"
+#include "containers/stack.h"
+#include "containers/queue.h"
+#include "containers/set.h"
+#include "containers/map.h"
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      ARRAY                                     ||
 // ! ||--------------------------------------------------------------------------------||
 
-bool ft_acof(const char **array, const char *str);
-size_t ft_asize(const char **array);
+bool ft_acontains(const char **array, const char *str);
+size_t ft_aindexof(const char **array, const char *str);
+size_t ft_acapacity(const char **array);
+size_t ft_amaxlen(const char **array);
 size_t ft_alen(const char **array);
 char **ft_acpy(const char **arr);
 char **ft_split(const char *str, char del);
 
-void sort_array(void *array, size_t size, size_t elem_size, CompareFunc compare);
+void ft_sort_array(void *array, size_t size, size_t elem_size, CompareFunc compare);
 void ft_reverse_array(void *array, size_t size, size_t elem_size);
-int ft_max_in_array(void *array, size_t size, size_t elem_size);
-int ft_min_in_array(void *array, size_t size, size_t elem_size);
+void *ft_max_in_array(void *array, size_t size, size_t elem_size);
+void *ft_min_in_array(void *array, size_t size, size_t elem_size);
+void *ft_afind(void *array, size_t size, size_t elem_size, const void *target, CompareFunc compare);
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      ALLOC                                     ||
 // ! ||--------------------------------------------------------------------------------||
 
 void *ft_calloc(size_t size, size_t count);
-void ft_multifree(void **ptrs);
-void ft_afree(void **ptr, size_t size);
-void ft_free(void *ptr);
-size_t ft_acol(const char **array);
-void **ft_aalloc(size_t size, size_t size_x, size_t size_y);
+void ft_free_each(void **ptrs);
+void ft_free_array(void **ptr, size_t size);
+void ft_free(void **ptr);
+void **ft_alloc_2d(size_t size, size_t size_x, size_t size_y);
 void *ft_realloc(void *ptr, size_t newsize);
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      SORT                                      ||
 // ! ||--------------------------------------------------------------------------------||
 
-void ft_qsort(void *array, int low, int high, size_t size, CompareFunc compare);
+void ft_qsort(void *array, size_t size, size_t elem_size, CompareFunc compare);
 void ft_bsort(void *array, size_t size, size_t elem_size, CompareFunc compare);
 void ft_isort(void *array, size_t size, size_t elem_size, CompareFunc compare);
+void ft_hsort(void *array, size_t size, size_t elem_size, CompareFunc compare);
+void ft_msort(void *array, size_t size, size_t elem_size, CompareFunc compare);
 
 void ft_sswap(void *a, void *b, size_t elem_size);
-int is_sorted(void *array, size_t size, size_t elem_size, CompareFunc compare);
+bool ft_is_sorted(void *array, size_t size, size_t elem_size,
+        CompareFunc compare);
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                COMPARE FUNCTIONS                               ||
@@ -133,6 +149,7 @@ void *ft_memupper(void *ptr, size_t len);
 void *ft_memcrm(void *ptr, char c, size_t len);
 void *ft_memsrm(void *ptr, char *str, size_t len);
 void *ft_memchr(const void *ptr, int value, size_t len);
+void *ft_memrchr(const void *ptr, int value, size_t len);
 void *ft_memshr(const void *ptr, const void *cmp, size_t len, size_t nb);
 void *ft_memalloc(void **dst, const void *ref, size_t size, size_t len);
 void *ft_memmove(void *dest, const void *ptr, size_t len);
@@ -155,6 +172,11 @@ bool ft_isdigit(int c);
 bool ft_isupper(int c);
 bool ft_islower(int c);
 bool ft_isspace(int c);
+bool ft_isxdigit(int c);
+bool ft_iscntrl(int c);
+bool ft_isprint(int c);
+bool ft_isgraph(int c);
+bool ft_ispunct(int c);
 
 int ft_toupper(int c);
 int ft_tolower(int c);
@@ -194,18 +216,46 @@ char *ft_strrdbls(const char *str, char c);
 char *ft_substr(char *str, size_t start, size_t len);
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
+// Pointer-returning search, case-insensitive comparison, and whole-string
+// case transforms.
+char *ft_strstr(const char *haystack, const char *needle);
+char *ft_strrchr(const char *str, int c);
+int ft_strcasecmp(const char *str, const char *str2);
+int ft_strncasecmp(const char *str, const char *str2, size_t len);
+char *ft_strupper(char *str);
+char *ft_strlower(char *str);
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                     NUMBERS                                    ||
 // ! ||--------------------------------------------------------------------------------||
 
 size_t ft_nbrlen(int nbr);
+size_t ft_nbrlen_long(long nbr);
+size_t ft_nbrlen_llong(long long nbr);
+size_t ft_nbrlen_base(int nbr, int base);
+
+long ft_abs(int nbr);
+int ft_min_int(int a, int b);
+int ft_max_int(int a, int b);
+int ft_clamp_int(int nbr, int min, int max);
+
+int ft_pow(int base, int exp);
+long ft_gcd(int a, int b);
+long ft_lcm(int a, int b);
+bool ft_is_prime(int nbr);
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                     CONVERT                                    ||
 // ! ||--------------------------------------------------------------------------------||
 
 int ft_atoi(const char *str);
+long ft_atol(const char *str);
+long long ft_atoll(const char *str);
+int ft_atoi_base(const char *str, int base);
+double ft_atof(const char *str);
+
 char *ft_itoa(int n);
+char *ft_lltoa(long long n);
 char *ft_itoa_base(int nb, int base);
 
 // ! ||--------------------------------------------------------------------------------||
@@ -221,6 +271,15 @@ void ft_lstiter(t_list *lst, void (*f)(void *));
 void ft_lstdelone(t_list *lst, void (*f)(void *));
 void ft_lstclear(t_list **lst, void (*f)(void *));
 
+// remove/insert-before are O(n) here (no `prev` pointer to walk backward
+// from); insert-after stays O(1).
+void ft_lstremove(t_list **lst, t_list *node, void (*del)(void *));
+void ft_lstinsert_before(t_list **lst, t_list *node, t_list *new);
+void ft_lstinsert_after(t_list *node, t_list *new);
+void ft_lstreverse(t_list **lst);
+t_list *ft_lstfind(t_list *lst, const void *data_ref, CompareFunc compare);
+t_list *ft_lstat(t_list *lst, size_t index);
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                               DOUBLE LINKED LIST                               ||
 // ! ||--------------------------------------------------------------------------------||
@@ -234,22 +293,48 @@ t_dlist *ft_dlstlast(t_dlist *lst);
 t_dlist *ft_dlstnew(void *data);
 size_t ft_dlstsize(t_dlist *lst);
 
+// unlinking, inserting around an arbitrary node, and reversing rely on
+// `prev`, so they only exist on this doubly-linked list.
+void ft_dlstremove(t_dlist **lst, t_dlist *node, void (*del)(void *));
+void ft_dlstinsert_before(t_dlist **lst, t_dlist *node, t_dlist *new);
+void ft_dlstinsert_after(t_dlist *node, t_dlist *new);
+void ft_dlstreverse(t_dlist **lst);
+t_dlist *ft_dlstfind(t_dlist *lst, const void *data_ref, CompareFunc compare);
+t_dlist *ft_dlstat(t_dlist *lst, size_t index);
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                     RB TREE                                    ||
 // ! ||--------------------------------------------------------------------------------||
 
-Node *createNode(void *data, Color color, Node *parent);
-RBTree *createRBTree();
+Node *createNode(RBTree *tree, void *data, Color color, Node *parent);
+RBTree *createRBTree(CompareFunc compare);
 void rotateLeft(RBTree *tree, Node *x);
 void rotateRight(RBTree *tree, Node *y);
 void fixInsert(RBTree *tree, Node *k);
-void insert(RBTree *tree, void *key);
+void insert(RBTree *tree, void *data);
+
+void fixDelete(RBTree *tree, Node *x);
+void *rbtree_delete(RBTree *tree, void *key);
+Node *rbtree_search(RBTree *tree, void *key);
+bool rbtree_contains(RBTree *tree, void *key);
+Node *rbtree_min_node(RBTree *tree, Node *node);
+Node *rbtree_max_node(RBTree *tree, Node *node);
+Node *rbtree_successor(RBTree *tree, Node *node);
+Node *rbtree_predecessor(RBTree *tree, Node *node);
+size_t rbtree_size(RBTree *tree);
+size_t rbtree_height(RBTree *tree);
+bool rbtree_is_empty(RBTree *tree);
+bool rbtree_is_valid(RBTree *tree);
+
 int is_left_child(Node *node);
-void freeNode(Node *node);
-void freeRBTree(RBTree *tree);
-void printNode(Node *node);
-void printRBTree(RBTree *tree);
-void printRBTreeIndented(RBTree *tree);
+void freeNode(RBTree *tree, Node *node, bool free_data);
+void freeRBTree(RBTree *tree, bool free_data);
+
+void rbtree_print_int(void *data);
+void printNode(RBTree *tree, Node *node, void (*print_data)(void *));
+void printRBTree(RBTree *tree, void (*print_data)(void *));
+void printNodeIndented(RBTree *tree, Node *node, int indent, void (*print_data)(void *));
+void printRBTreeIndented(RBTree *tree, void (*print_data)(void *));
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                     PRINT                                      ||
@@ -261,11 +346,24 @@ void ft_putstr(const char *str);
 void ft_putnbr(int nbr);
 void ft_putsarray(const char **array);
 
+// Standard 42 libft bonus API: same as above, but to an arbitrary fd
+// instead of being hardcoded to fd 1.
+void ft_putchar_fd(char c, int fd);
+void ft_putstr_fd(const char *str, int fd);
+void ft_putendl_fd(const char *str, int fd);
+void ft_putnbr_fd(int nbr, int fd);
+void ft_putsarray_fd(const char **array, int fd);
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      TIME                                      ||
 // ! ||--------------------------------------------------------------------------------||
 
-void startTimer(clock_t *start);
-double stopTimer(clock_t start);
+void ft_start_timer(clock_t *start);
+double ft_stop_timer(clock_t start);
+
+// Wall-clock timing, sleeping, and date/time formatting.
+long long ft_monotonic_ms(void);
+void ft_sleep_ms(unsigned int ms);
+char *ft_now_string(char *buf, size_t size, const char *format);
 
 #endif

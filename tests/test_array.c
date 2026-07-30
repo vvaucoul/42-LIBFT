@@ -1,18 +1,36 @@
 /* ************************************************************************** */
-/*   test_array.c - srcs/array/ *.c                                          */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_array.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include "framework/test_framework.h"
 
-TEST(array, acof_found_and_missing)
+TEST(array, acontains_found_and_missing)
 {
 	const char *arr[] = {"foo", "bar", "baz", NULL};
 
-	ASSERT(ft_acof(arr, "bar") == true);
-	ASSERT(ft_acof(arr, "qux") == false);
-	ASSERT(ft_acof(NULL, "bar") == false);
-	ASSERT(ft_acof(arr, NULL) == false);
+	ASSERT(ft_acontains(arr, "bar") == true);
+	ASSERT(ft_acontains(arr, "qux") == false);
+	ASSERT(ft_acontains(NULL, "bar") == false);
+	ASSERT(ft_acontains(arr, NULL) == false);
+}
+
+TEST(array, aindexof_found_and_missing)
+{
+	const char *arr[] = {"foo", "bar", "baz", NULL};
+
+	ASSERT_EQ_UINT(ft_aindexof(arr, "bar"), 1);
+	ASSERT_EQ_UINT(ft_aindexof(arr, "foo"), 0);
+	ASSERT_EQ_UINT(ft_aindexof(arr, "qux"), (size_t)-1);
+	ASSERT_EQ_UINT(ft_aindexof(NULL, "bar"), (size_t)-1);
 }
 
 TEST(array, alen_counts_entries)
@@ -25,38 +43,35 @@ TEST(array, alen_counts_entries)
 	ASSERT_EQ_UINT(ft_alen(NULL), 0);
 }
 
-/* ft_asize's inner-loop cursor `j` is declared OUTSIDE the row loop and is
-** never reset back to 0 between rows: each row's scan resumes indexing
-** from wherever the previous (possibly longer) row left off. With rows of
-** non-decreasing length this never walks past a row's own NUL byte, so the
-** result matches the intended "(nb_rows + 1) * (longest_row + 1)" formula
-** - this case is safe and deterministic. */
-TEST(array, asize_uses_longest_row_and_count)
-{
-	const char *arr[] = {"a", "bb", "ccc", NULL};
-
-	ASSERT_EQ_UINT(ft_asize(arr), (3 + 1) * (3 + 1));
-	ASSERT_EQ_UINT(ft_asize(NULL), 0);
-}
-
-/* Same non-reset cursor bug, isolated on its own: once a row is SHORTER
-** than the running cursor, the inner loop reads past that row's NUL
-** terminator into whatever memory follows the string literal/buffer,
-** silently continuing to scan out-of-bounds. The exact byte count read
-** depends on adjacent memory layout, so we only assert it doesn't crash -
-** not a specific value. */
-TEST(array, asize_cursor_not_reset_between_rows_known_bug)
+/* Rows are in decreasing length order, so a cursor not reset between rows would read out of bounds. */
+TEST(array, acapacity_resets_cursor_between_shorter_rows)
 {
 	const char *arr[] = {"abc", "a", NULL};
 
-	(void)ft_asize(arr);
+	ASSERT_EQ_UINT(ft_acapacity(arr), (2 + 1) * (3 + 1));
 }
 
-TEST(array, acol_returns_longest_row_len_plus_one)
+TEST(array, acapacity_uses_longest_row_and_count)
 {
 	const char *arr[] = {"a", "bb", "ccc", NULL};
 
-	ASSERT_EQ_UINT(ft_acol(arr), 3 + 1);
+	ASSERT_EQ_UINT(ft_acapacity(arr), (3 + 1) * (3 + 1));
+	ASSERT_EQ_UINT(ft_acapacity(NULL), 0);
+}
+
+TEST(array, amaxlen_resets_cursor_between_shorter_rows)
+{
+	const char *arr[] = {"abc", "a", NULL};
+
+	ASSERT_EQ_UINT(ft_amaxlen(arr), 3 + 1);
+}
+
+TEST(array, amaxlen_returns_longest_row_len_plus_one)
+{
+	const char *arr[] = {"a", "bb", "ccc", NULL};
+
+	ASSERT_EQ_UINT(ft_amaxlen(arr), 3 + 1);
+	ASSERT_EQ_UINT(ft_amaxlen(NULL), 0);
 }
 
 TEST(array, split_basic)
@@ -97,28 +112,41 @@ TEST(array, split_null_returns_null)
 	ASSERT_NULL(ft_split(NULL, ','));
 }
 
-/* ft_acpy copies element i via ft_strcpy(new_array[i], arr[i]) where
-** new_array[i] starts NULL. ft_strcpy has an inverted guard
-** (`if (str) return NULL;`) so it returns NULL whenever the source string
-** is non-NULL - every single copy silently fails and ft_acpy ends up
-** producing an array of NULL entries instead of copied strings. */
-TEST(array, acpy_broken_by_strcpy_bug_known_bug)
+TEST(array, acpy_copies_every_string)
 {
-	const char *arr[] = {"foo", "bar", NULL};
+	const char *arr[] = {"foo", "bar", "baz", NULL};
 	char **copy = ft_acpy(arr);
 
 	ASSERT_NOT_NULL(copy);
-	ASSERT_MSG(copy[0] != NULL && !strcmp(copy[0], "foo"),
-		"ft_acpy(arr)[0]: expected \"foo\", got %s (ft_strcpy always "
-		"returns NULL on a non-NULL source string)",
-		copy[0] ? copy[0] : "(null)");
+	ASSERT_EQ_STR(copy[0], "foo");
+	ASSERT_EQ_STR(copy[1], "bar");
+	ASSERT_EQ_STR(copy[2], "baz");
+	ASSERT_NULL(copy[3]);
+	/* independent copies, not aliases of the originals */
+	ASSERT(copy[0] != arr[0]);
+	ft_free_array((void **)copy, 3);
+}
+
+TEST(array, acpy_empty_array)
+{
+	const char *arr[] = {NULL};
+	char **copy = ft_acpy(arr);
+
+	ASSERT_NOT_NULL(copy);
+	ASSERT_NULL(copy[0]);
+	ft_free_array((void **)copy, 0);
+}
+
+TEST(array, acpy_null_returns_null)
+{
+	ASSERT_NULL(ft_acpy(NULL));
 }
 
 TEST(array, sort_array_ints)
 {
 	int arr[] = {5, 3, 4, 1, 2};
 
-	sort_array(arr, 5, sizeof(int), compare_int);
+	ft_sort_array(arr, 5, sizeof(int), compare_int);
 	for (int i = 0; i < 5; ++i)
 		ASSERT_EQ_INT(arr[i], i + 1);
 }
@@ -135,25 +163,73 @@ TEST(array, reverse_array_ints)
 	ASSERT_EQ_INT(arr[4], 1);
 }
 
+TEST(array, reverse_array_empty_and_single_are_safe_noops)
+{
+	int arr[] = {42};
+
+	ft_reverse_array(arr, 0, sizeof(int));
+	ft_reverse_array(arr, 1, sizeof(int));
+	ASSERT_EQ_INT(arr[0], 42);
+}
+
 TEST(array, min_in_array_small_values)
 {
 	int arr[] = {5, 3, 9, 1, 7};
+	void *min = ft_min_in_array(arr, 5, sizeof(int));
 
-	/* value fits in a byte, so the return-truncation bug below doesn't
-	** manifest here - a genuinely correct case. */
-	ASSERT_EQ_INT(ft_min_in_array(arr, 5, sizeof(int)), 1);
+	ASSERT_NOT_NULL(min);
+	ASSERT_EQ_INT(*(int *)min, 1);
 }
 
-/* ft_max_in_array/ft_min_in_array correctly locate the extreme element via
-** ft_memcmp over the whole elem_size, but then `return *max;` dereferences
-** only the FIRST BYTE of that element through a char*. For any value that
-** doesn't fit in a single (signed) byte, the returned "max" is garbage. */
-TEST(array, max_in_array_truncates_to_one_byte_known_bug)
+TEST(array, max_in_array_values_larger_than_one_byte)
 {
 	int arr[] = {300, 5, 1};
+	void *max = ft_max_in_array(arr, 3, sizeof(int));
 
-	ASSERT_MSG(ft_max_in_array(arr, 3, sizeof(int)) == 300,
-		"ft_max_in_array({300,5,1}): expected 300, got %d (only the low "
-		"byte of the winning element is returned)",
-		ft_max_in_array(arr, 3, sizeof(int)));
+	ASSERT_NOT_NULL(max);
+	ASSERT_EQ_INT(*(int *)max, 300);
+}
+
+TEST(array, max_and_min_in_array_return_pointer_into_original_array)
+{
+	int arr[] = {5, 3, 9, 1, 7};
+	void *max = ft_max_in_array(arr, 5, sizeof(int));
+	void *min = ft_min_in_array(arr, 5, sizeof(int));
+
+	ASSERT_EQ_PTR(max, &arr[2]);
+	ASSERT_EQ_PTR(min, &arr[3]);
+}
+
+TEST(array, max_and_min_in_array_empty_returns_null)
+{
+	int arr[] = {1};
+
+	ASSERT_NULL(ft_max_in_array(arr, 0, sizeof(int)));
+	ASSERT_NULL(ft_min_in_array(arr, 0, sizeof(int)));
+}
+
+TEST(array, afind_locates_matching_element)
+{
+	int arr[] = {5, 3, 9, 1, 7};
+	int target = 9;
+	void *found = ft_afind(arr, 5, sizeof(int), &target, compare_int);
+
+	ASSERT_EQ_PTR(found, &arr[2]);
+}
+
+TEST(array, afind_no_match_returns_null)
+{
+	int arr[] = {5, 3, 9, 1, 7};
+	int target = 42;
+
+	ASSERT_NULL(ft_afind(arr, 5, sizeof(int), &target, compare_int));
+}
+
+TEST(array, afind_null_args_are_safe)
+{
+	int arr[] = {1, 2, 3};
+	int target = 1;
+
+	ASSERT_NULL(ft_afind(NULL, 3, sizeof(int), &target, compare_int));
+	ASSERT_NULL(ft_afind(arr, 3, sizeof(int), NULL, compare_int));
 }

@@ -1,182 +1,324 @@
 /* ************************************************************************** */
-/*   test_printf.c - srcs/printf/ft_printf.c and ft_sscanf.c                 */
 /*                                                                            */
-/*   ft_printf's inner dispatcher (display_case) only implements two         */
-/*   conversions: %d/%i and %s. Every other conversion character (%u %x %X  */
-/*   %o %p %c %% ...), and any flag/width/precision character, falls        */
-/*   through as a silent no-op that also skips its va_arg() call - so it     */
-/*   doesn't just "print nothing", it desyncs the va_list for every         */
-/*   specifier that follows in the same call. ft_printf's return value is   */
-/*   also hardcoded to 0 regardless of how many bytes were written.         */
-/*   ft_sscanf is an entirely unimplemented stub that always returns 0 and  */
-/*   never touches its format string or output pointers - it isn't         */
-/*   declared in any header, so we declare our own prototype here.          */
+/*                                                        :::      ::::::::   */
+/*   test_printf.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include "framework/test_framework.h"
 
-extern int ft_sscanf(const char *str, const char *format, ...);
-
-static const char	*g_fmt;
-static int			g_int_arg;
-static const char	*g_str_arg;
-static char			g_char_arg;
-static int			g_ret;
+static const char   *g_fmt;
+static int          g_int_arg;
+static const char   *g_str_arg;
+static char         g_char_arg;
+static int          g_ret;
 
 static void action_d(void)
 {
-	g_ret = ft_printf(g_fmt, g_int_arg);
+    g_ret = ft_printf(g_fmt, g_int_arg);
 }
 
 static void action_s(void)
 {
-	g_ret = ft_printf(g_fmt, g_str_arg);
+    g_ret = ft_printf(g_fmt, g_str_arg);
 }
 
 static void action_cd(void)
 {
-	g_ret = ft_printf(g_fmt, g_char_arg, g_int_arg);
+    g_ret = ft_printf(g_fmt, g_char_arg, g_int_arg);
 }
 
 TEST(printf, d_and_i_print_normally)
 {
-	char *out;
+    char *out;
 
-	g_fmt = "%d";
-	g_int_arg = 42;
-	out = test_capture_fd1(action_d);
-	ASSERT_EQ_STR(out, "42");
-	free(out);
+    g_fmt = "%d";
+    g_int_arg = 42;
+    out = test_capture_fd1(action_d);
+    ASSERT_EQ_STR(out, "42");
+    free(out);
 
-	g_fmt = "%i";
-	g_int_arg = -7;
-	out = test_capture_fd1(action_d);
-	ASSERT_EQ_STR(out, "-7");
-	free(out);
+    g_fmt = "%i";
+    g_int_arg = -7;
+    out = test_capture_fd1(action_d);
+    ASSERT_EQ_STR(out, "-7");
+    free(out);
 }
 
 TEST(printf, s_prints_string)
 {
-	char *out;
+    char *out;
 
-	g_fmt = "%s";
-	g_str_arg = "hello";
-	out = test_capture_fd1(action_s);
-	ASSERT_EQ_STR(out, "hello");
-	free(out);
+    g_fmt = "%s";
+    g_str_arg = "hello";
+    out = test_capture_fd1(action_s);
+    ASSERT_EQ_STR(out, "hello");
+    free(out);
 }
 
-/* NULL is handled without crashing, but prints lowercase "null" - not
-** glibc's "(null)". */
-TEST(printf, s_null_prints_lowercase_null)
+TEST(printf, s_null_prints_parenthesized_null)
 {
-	char *out;
+    char *out;
 
-	g_fmt = "%s";
-	g_str_arg = NULL;
-	out = test_capture_fd1(action_s);
-	ASSERT_EQ_STR(out, "null");
-	free(out);
+    g_fmt = "%s";
+    g_str_arg = NULL;
+    out = test_capture_fd1(action_s);
+    ASSERT_EQ_STR(out, "(null)");
+    free(out);
 }
 
-/* Return value is hardcoded to 0 in ft_printf's own success path,
-** regardless of how many bytes were actually written. */
-TEST(printf, return_value_is_always_zero_known_bug)
+TEST(printf, return_value_is_bytes_written)
 {
-	g_fmt = "%s";
-	g_str_arg = "some non-empty output";
-	free(test_capture_fd1(action_s));
-	ASSERT_MSG(g_ret == (int)strlen("some non-empty output"),
-		"ft_printf should return the number of bytes written (%zu), but "
-		"always returns %d", strlen("some non-empty output"), g_ret);
+    g_fmt = "%s";
+    g_str_arg = "some non-empty output";
+    free(test_capture_fd1(action_s));
+    ASSERT_EQ_INT(g_ret, (int)strlen("some non-empty output"));
 }
 
-/* %c is entirely unimplemented: it neither prints the char nor consumes
-** its va_arg. The following %d then reads THAT unconsumed argument
-** instead of its own - every conversion other than %d/%i/%s corrupts the
-** rest of the va_list for the call. */
-TEST(printf, unsupported_conversions_desync_va_list_known_bug)
+TEST(printf, unsupported_conversion_prints_literally_no_desync)
 {
-	char *out;
+    char *out;
 
-	g_fmt = "%c%d";
-	g_char_arg = 'A';
-	g_int_arg = 99;
-	out = test_capture_fd1(action_cd);
-	ASSERT_MSG(!strcmp(out, "A99"),
-		"ft_printf(\"%%c%%d\", 'A', 99) should print \"A99\", got \"%s\" "
-		"(%%c is a no-op that never calls va_arg, so %%d reads the char "
-		"argument instead of the int one)", out);
-	free(out);
+    g_fmt = "%c%d";
+    g_char_arg = 'A';
+    g_int_arg = 99;
+    out = test_capture_fd1(action_cd);
+    ASSERT_EQ_STR(out, "A99");
+    free(out);
 }
 
-/* %% is one of the unsupported conversions too: it doesn't even fall back
-** to printing a literal '%' - the pair of characters just produces
-** nothing at all. */
+static void action_bogus(void)
+{
+    g_ret = ft_printf("%q%d", 42);
+}
+
+TEST(printf, truly_unknown_conversion_is_literal_and_safe)
+{
+    char *out;
+
+    out = test_capture_fd1(action_bogus);
+    ASSERT_EQ_STR(out, "%q42");
+    free(out);
+}
+
 static void action_literal_percent(void)
 {
-	g_ret = ft_printf("100%%");
+    g_ret = ft_printf("100%%");
 }
 
-TEST(printf, percent_percent_prints_nothing_known_bug)
+TEST(printf, percent_percent_prints_literal_percent)
 {
-	char *out;
+    char *out;
 
-	out = test_capture_fd1(action_literal_percent);
-	ASSERT_MSG(!strcmp(out, "100%"),
-		"ft_printf(\"100%%%%\") should print \"100%%\", got \"%s\" (%%%% "
-		"falls into the same unimplemented-conversion no-op as every "
-		"other unsupported specifier)", out);
-	free(out);
+    out = test_capture_fd1(action_literal_percent);
+    ASSERT_EQ_STR(out, "100%");
+    free(out);
 }
 
 static void action_trailing_percent(void)
 {
-	g_ret = ft_printf("abc%");
+    g_ret = ft_printf("abc%");
 }
 
-/* A '%' as the very last byte of the format string makes the parser look
-** at str[i+1] == '\0' (safe), but then advance by 2 regardless, landing
-** one byte past the NUL terminator for the next loop-condition check -
-** an out-of-bounds read. Isolated since the outcome depends on what
-** happens to sit in the byte after the string's allocation. */
-TEST(printf, trailing_percent_oob_read_known_bug_isolated)
+TEST(printf, trailing_percent_is_printed_literally)
 {
-	char *out = test_capture_fd1(action_trailing_percent);
+    char *out;
 
-	ASSERT_MSG(!strncmp(out, "abc", 3),
-		"ft_printf(\"abc%%\") should at least print \"abc\" before hitting "
-		"the trailing %%, got \"%s\"", out);
-	free(out);
+    out = test_capture_fd1(action_trailing_percent);
+    ASSERT_EQ_STR(out, "abc%");
+    free(out);
 }
 
 static void action_int_min(void)
 {
-	g_ret = ft_printf("%d", -2147483648);
+    g_ret = ft_printf("%d", -2147483648);
 }
 
-/* ft_putnbr(INT_MIN) negates INT_MIN (`nbr *= -1`), which overflows a
-** 32-bit int (UB) and in practice commonly yields INT_MIN right back,
-** causing unbounded recursion -> stack overflow. Isolated. */
-TEST(printf, d_int_min_known_bug_isolated)
+TEST(printf, d_int_min_prints_correctly)
 {
-	free(test_capture_fd1(action_int_min));
+    char *out;
+
+    out = test_capture_fd1(action_int_min);
+    ASSERT_EQ_STR(out, "-2147483648");
+    free(out);
 }
 
-TEST(sscanf, always_returns_zero_and_never_writes_known_bug)
+TEST(printf, unsigned_and_hex_and_octal)
 {
-	int target = -999999;
-	int ret = ft_sscanf("42", "%d", &target);
+    char buf[64];
 
-	ASSERT_EQ_INT(ret, 0);
-	ASSERT_MSG(target == -999999,
-		"ft_sscanf(\"42\", \"%%d\", &target) is a stub: target should "
-		"remain untouched at the sentinel value (got %d) and it does, "
-		"but it should really have parsed 42", target);
+    ft_sprintf(buf, "%u", 4294967295u);
+    ASSERT_EQ_STR(buf, "4294967295");
+    ft_sprintf(buf, "%x", 255);
+    ASSERT_EQ_STR(buf, "ff");
+    ft_sprintf(buf, "%X", 255);
+    ASSERT_EQ_STR(buf, "FF");
+    ft_sprintf(buf, "%o", 8);
+    ASSERT_EQ_STR(buf, "10");
 }
 
-TEST(sscanf, null_arguments_do_not_crash)
+TEST(printf, flags_width_precision)
 {
-	ASSERT_EQ_INT(ft_sscanf(NULL, NULL), 0);
+    char buf[64];
+
+    ft_sprintf(buf, "%5d", 42);
+    ASSERT_EQ_STR(buf, "   42");
+    ft_sprintf(buf, "%-5d|", 42);
+    ASSERT_EQ_STR(buf, "42   |");
+    ft_sprintf(buf, "%05d", 42);
+    ASSERT_EQ_STR(buf, "00042");
+    ft_sprintf(buf, "%+d", 42);
+    ASSERT_EQ_STR(buf, "+42");
+    ft_sprintf(buf, "% d", 42);
+    ASSERT_EQ_STR(buf, " 42");
+    ft_sprintf(buf, "%.5d", 42);
+    ASSERT_EQ_STR(buf, "00042");
+    ft_sprintf(buf, "%#x", 255);
+    ASSERT_EQ_STR(buf, "0xff");
+    ft_sprintf(buf, "%#o", 8);
+    ASSERT_EQ_STR(buf, "010");
+}
+
+TEST(printf, precision_zero_value_zero_prints_nothing)
+{
+    char buf[64];
+
+    ft_sprintf(buf, "[%.0d]", 0);
+    ASSERT_EQ_STR(buf, "[]");
+}
+
+TEST(printf, star_width_and_precision)
+{
+    char buf[64];
+
+    ft_sprintf(buf, "%*d", 8, 42);
+    ASSERT_EQ_STR(buf, "      42");
+    ft_sprintf(buf, "%.*f", 2, 3.14159);
+    ASSERT_EQ_STR(buf, "3.14");
+}
+
+TEST(printf, length_modifiers_truncate_correctly)
+{
+    char buf[64];
+
+    ft_sprintf(buf, "%hhd", 200);
+    ASSERT_EQ_STR(buf, "-56");
+    ft_sprintf(buf, "%ld", 123456789012L);
+    ASSERT_EQ_STR(buf, "123456789012");
+    ft_sprintf(buf, "%lld", 123456789012345LL);
+    ASSERT_EQ_STR(buf, "123456789012345");
+}
+
+TEST(printf, char_and_pointer)
+{
+    char buf[64];
+    int  x;
+
+    ft_sprintf(buf, "%c", 'Z');
+    ASSERT_EQ_STR(buf, "Z");
+    ft_sprintf(buf, "%5c", 'Z');
+    ASSERT_EQ_STR(buf, "    Z");
+    ft_sprintf(buf, "%p", (void *)NULL);
+    ASSERT_EQ_STR(buf, "(nil)");
+    ft_sprintf(buf, "%p", (void *)&x);
+    ASSERT_NOT_NULL(strstr(buf, "0x"));
+}
+
+TEST(printf, float_basic_and_precision)
+{
+    char buf[64];
+
+    ft_sprintf(buf, "%f", 3.14159);
+    ASSERT_EQ_STR(buf, "3.141590");
+    ft_sprintf(buf, "%.2f", 3.14159);
+    ASSERT_EQ_STR(buf, "3.14");
+    ft_sprintf(buf, "%8.2f", 3.14159);
+    ASSERT_EQ_STR(buf, "    3.14");
+    ft_sprintf(buf, "%-8.2f|", 3.14159);
+    ASSERT_EQ_STR(buf, "3.14    |");
+    ft_sprintf(buf, "%08.2f", 3.14159);
+    ASSERT_EQ_STR(buf, "00003.14");
+    ft_sprintf(buf, "%f", -3.14159);
+    ASSERT_EQ_STR(buf, "-3.141590");
+    ft_sprintf(buf, "%.0f", 3.7);
+    ASSERT_EQ_STR(buf, "4");
+}
+
+TEST(printf, dprintf_writes_to_arbitrary_fd)
+{
+    int     pipefd[2];
+    char    buf[32];
+    ssize_t n;
+    int     ret;
+
+    ASSERT(pipe(pipefd) == 0);
+    ret = ft_dprintf(pipefd[1], "count=%d", 42);
+    close(pipefd[1]);
+    n = read(pipefd[0], buf, sizeof(buf) - 1);
+    close(pipefd[0]);
+    ASSERT(n >= 0);
+    buf[n] = '\0';
+    ASSERT_EQ_STR(buf, "count=42");
+    ASSERT_EQ_INT(ret, 8);
+}
+
+/* Mirrors the real (unbounded, unsafe) sprintf() contract. */
+TEST(printf, sprintf_writes_to_buffer)
+{
+    char buf[64];
+    int  ret;
+
+    ret = ft_sprintf(buf, "%s is %d", "answer", 42);
+    ASSERT_EQ_STR(buf, "answer is 42");
+    ASSERT_EQ_INT(ret, 12);
+}
+
+TEST(printf, snprintf_truncates_but_reports_full_length)
+{
+    char buf[8];
+    int  ret;
+
+    ret = ft_snprintf(buf, sizeof(buf), "%s", "this is way too long");
+    ASSERT_EQ_STR(buf, "this is");
+    ASSERT_EQ_INT(ret, (int)strlen("this is way too long"));
+}
+
+TEST(printf, snprintf_zero_size_writes_nothing)
+{
+    char buf[4] = "XXX";
+
+    ft_snprintf(buf, 0, "%d", 42);
+    ASSERT_EQ_STR(buf, "XXX");
+}
+
+static int wrap_vprintf(const char *fmt, ...)
+{
+    va_list args;
+    int     ret;
+
+    va_start(args, fmt);
+    ret = ft_vprintf(fmt, args);
+    va_end(args);
+    return (ret);
+}
+
+static void action_vprintf(void)
+{
+    g_ret = wrap_vprintf("%d-%s", 7, "ok");
+}
+
+TEST(printf, vprintf_variant_works)
+{
+    char *out;
+
+    out = test_capture_fd1(action_vprintf);
+    ASSERT_EQ_STR(out, "7-ok");
+    free(out);
+    ASSERT_EQ_INT(g_ret, 4);
 }

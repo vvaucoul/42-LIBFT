@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvaucoul <vvaucoul@student.42.Fr>          +#+  +:+       +#+        */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 17:28:36 by vvaucoul          #+#    #+#             */
-/*   Updated: 2022/05/19 00:13:38 by vvaucoul         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,12 @@ static int n_lenght(int n)
     }
     else if (n == 0)
         return (1);
-    else if (n == -2147483648)
-        return (11);
     while (n >= 1)
     {
         n /= 10;
         ++nsize;
     }
     return (nsize);
-}
-
-static int is_min_int(int n, char **str)
-{
-    if (n != -2147483648)
-        return (0);
-    *str = ft_strdup("-2147483648");
-    return (1);
 }
 
 char *ft_itoa(int n)
@@ -49,15 +39,14 @@ char *ft_itoa(int n)
     char *str;
     int isneg;
 
+    if (n == -2147483648)
+        return (ft_strdup("-2147483648"));
     size = n_lenght(n);
-    str = malloc(sizeof(char) * (n_lenght(n) + 1));
-    if (!str)
+    if (!(str = malloc(sizeof(char) * (size + 1))))
         return (NULL);
-    if (is_min_int(n, &str) == 1)
-        return (str);
-    if ((isneg = ((n >= -2147483647 && n < 0) ? 1 : 0)) == 1)
+    if ((isneg = (n < 0)) == 1)
         n *= -1;
-    i = (isneg ? 1 : 1);
+    i = 1;
     while (size - i >= 0)
     {
         str[size - i] = n % 10 + 48;

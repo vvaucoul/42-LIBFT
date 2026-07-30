@@ -1,204 +1,69 @@
 # 42-LIBFT
 
-Post Common Core - LIBFT (Without restrictions &amp; without norme)
+This is my libft from 42's Post Common Core, grown well past what the mandatory subject actually asks for. The original assignment wants a small set of string, memory and linked list helpers reimplemented in C89 under the school's norm. I kept the spirit of that (write your own primitives, don't lean on libc where the point is to build the thing yourself) but dropped the norm and the restrictions once the mandatory part was done, and kept adding modules whenever I wanted a piece of C infrastructure I'd normally just reach for in a bigger language: a red-black tree, a generic sort with an actual introsort behind it, a printf/scanf reimplementation, a small CLI argument parser, a conservative garbage collector, and so on.
 
-### LIBFT - FUNCTIONS
+Everything still compiles as a single static archive, `42_PCC_LIBFT.a`, with one public header, `libft.h`, pulling in every module.
 
-> ARRAY
+## Building
 
-```C
-bool ft_acof(const char **array, const char *str);
-size_t ft_asize(const char **array);
-size_t ft_alen(const char **array);
-char **ft_acpy(const char **arr);
-char **ft_split(const char *str, char del);
+```text
+make            build the archive
+make re         fclean then build
+make fast       re, parallelized across every detected core
+make debug      re with -O0 -g3 (this is already the default)
+make release    re with -O2, no debug info
+make strict     re with -Werror added on top of -Wall -Wextra
 ```
 
-> ALLOCATIONS
+The source list is generated at build time with `find srcs -name '*.c'`, so dropping a new file into `srcs/` is enough to have it picked up; nothing in the Makefile needs touching.
 
-```C
-void *ft_calloc(size_t size, size_t count);
-void ft_multifree(void **ptrs);
-void ft_afree(void **ptr);
-void ft_free(void *ptr);
-size_t ft_acol(const char **array);
-void **ft_aalloc(size_t size, size_t size_x, size_t size_y);
-void *ft_realloc(void *ptr, size_t newsize);
+## Testing
+
+Tests live in `tests/` and run through a small homemade framework rather than a pulled-in dependency. Each `TEST(suite, name) { ... }` block registers itself automatically through a constructor, and every test runs in its own forked child with a five second alarm, so a segfault or an infinite loop in one test shows up as a single failing line instead of taking the whole suite down with it.
+
+```text
+make test          build and run every test
+make test_verbose  same, but with -v for per-assertion output
+make asan          rebuild and run under AddressSanitizer
+make ubsan         rebuild and run under UndefinedBehaviorSanitizer
+make san           both sanitizers at once
+make valgrind      rebuild and run under valgrind's memcheck
 ```
 
-> MEMORY
+The suite currently sits at 541 tests across every module, and stays green under `-Werror`, ASan+UBSan together, and valgrind with zero leaks. A GitHub Actions workflow rebuilds and re-runs everything on every push.
 
-```C
-void *ft_memset(void *ptr, int c, size_t len);
-void *ft_memcpy(void *dst, const void *restrict src, size_t len);
-void *ft_bzero(void *ptr, size_t len);
-void *ft_memlower(void *ptr, size_t len);
-void *ft_memupper(void *ptr, size_t len);
-void *ft_memcrm(void *ptr, char c, size_t len);
-void *ft_memsrm(void *ptr, char *str, size_t len);
-void *ft_memchr(const void *ptr, int value, size_t len);
-void *ft_memshr(const void *ptr, const void *cmp, size_t len, size_t nb);
-void *ft_memalloc(void **dst, const void *ref, size_t size, size_t len);
-void *ft_memmove(void *dest, const void *ptr, size_t len);
-int ft_memcmp(const void *ptr, const void *ptr_cmp, size_t len);
-int ft_memscmp(const void *ptr, const void *ptr_cmp, size_t len, size_t start);
-void ft_swap(int *ptr, int *ptr_swap);
-void ft_vswap(void **ptr, void **ptr2);
-```
+Worth calling out for anyone poking at the `gc` module specifically: ASan's stack use-after-return detection moves local variables off the real stack, which breaks conservative stack scanning outright. `make san` compiles with `--param=asan-use-after-return=0` for exactly that reason (see `depends/Config.mk`), otherwise `gc_collect()` would be scanning the wrong memory entirely.
 
-> CHAR
+## Layout
 
-```C
-bool ft_ccof(char c, const char *str);
-bool ft_isascii(int c);
-bool ft_isalpha(int c);
-bool ft_isalnum(int c);
-bool ft_isdigit(int c);
-bool ft_isupper(int c);
-bool ft_islower(int c);
-bool ft_isspace(int c);
-int ft_toupper(int c);
-int ft_tolower(int c);
-```
+Each module gets its own directory under `srcs/` and, where the API is more than a couple of functions, its own header under `includes/` (the smallest, flattest modules share `libft.h` directly instead). Independent utility functions get one file per function; modules built around shared internal state, like the red-black tree, the logger, the sort engine, the parser, the printf/scanf engine or the garbage collector, are split by concern instead, with a private `_internal.h` header where the pieces need to share structs that callers never should.
 
-> STRINGS
+Here's what each directory under `srcs/` actually is.
 
-```C
-bool ft_scof(const char *str, const char *cmp);
-bool ft_sncof(const char *str, const char *cmp, size_t len);
-size_t ft_lentc(const char *str, char c);
-size_t ft_lents(const char *str, const char *cmp);
-char *ft_strdup(const char *str);
-size_t ft_strlen(const char *str);
-int ft_strcmp(const char *str, const char *str2);
-int ft_strncmp(const char *str, const char *str2, size_t len);
-char *ft_strcpy(const char *str);
-char *ft_strncpy(const char *str, size_t len);
-char *ft_strchr(const char *str, int c);
-char *ft_strjoin(const char *str, const char *join);
-char *ft_fstrjoin(char *str, const char *join);
-char *ft_strcjoin(char *str, char c);
-char *ft_fstrcjoin(char *str, char c);
-char *ft_multijoin(const char **array);
-int ft_strsncmp(const char *str, const char *cmp, size_t start, size_t len);
-char *ft_strtrim(char *str);
-char *ft_strzap(char *str, const char *pat);
-char *ft_strsplit(char *src, char **words, const char *sep);
-char *ft_strremove(const char *str, char c);
-char *ft_strrep(char *src, const char *pat, const char *new_pat);
-char *ft_strrdbls(const char *str, char c);
-char *ft_substr(char *str, size_t start, size_t len);
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
-```
+| Module | What it is |
+| --- | --- |
+| 📦 `alloc` | Allocation itself: calloc, a 2D allocator, realloc, batch-free helpers |
+| 🔢 `array` | NULL-terminated and generic comparator-based array utilities |
+| 🧠 `memory` | `<string.h>`-style buffer primitives, rebuilt from scratch |
+| 🔤 `char` | `<ctype.h>` equivalents |
+| 📝 `string` | Duplication, comparison, joining, splitting, trimming, search, case conversion |
+| 🧮 `number` | abs, min/max/clamp, gcd/lcm, primality |
+| 🔁 `convert` | String/number conversions: the atoi and itoa families |
+| 🔀 `sort` | Five sorting algorithms behind one comparator convention |
+| 🔗 `linked_list` | Singly linked list |
+| 🔗 `dlinked_list` | Doubly linked list |
+| 🌳 `rbtree` | Red-black tree |
+| 🌳 `binary-tree` | Plain, non-balancing generic binary tree |
+| 🗃️ `containers` | Vector, stack, queue, set, map, pair |
+| 🖨️ `print` | Minimal 42 output primitives |
+| 🖥️ `stdio` | Full printf/scanf family |
+| 📁 `file` | File and directory operations |
+| 📋 `logger` | Leveled logger |
+| ⚙️ `parser` | Getopt-style CLI argument parser |
+| 🔐 `crypto` | Hashing, base64, a XOR cipher, a CSPRNG wrapper, toy RSA |
+| ♻️ `gc` | Conservative mark-and-sweep garbage collector |
+| ⏱️ `time` | CPU timing, wall-clock timing, sleeping, date formatting |
 
-> NUMBERS
+## A note on naming
 
-```C
-size_t ft_nbrlen(int nbr);
-```
-
-> CONVERT
-
-```C
-int ft_atoi(const char *str);
-char *ft_itoa(int n);
-char *ft_itoa_base(int nb, int base);
-```
-
-> LINKED LIST
-
-```C
-void ft_lstadd_back(t_list **lst, t_list *new);
-void ft_lstadd_front(t_list **lst, t_list *new);
-size_t ft_lstsize(t_list *lst);
-t_list *ft_lstnew(void *data);
-t_list *ft_lstlast(t_list *lst);
-void ft_lstiter(t_list *lst, void (*f)(void *));
-void ft_lstdelone(t_list *lst, void (*f)(void *));
-void ft_lstclear(t_list **lst, void (*f)(void *));
-```
-
-> PRINT
-
-```C
-void ft_putchar(char c);
-void ft_putendl(const char *str);
-void ft_putstr(const char *str);
-void ft_putnbr(int nbr);
-void ft_putsarray(const char **array);
-```
-
-### FT_PRINTF
-
-- Lightweight printf
-
-> Supported Flags
-> - %
-> - d
-> - i
-> - s
-
-```C
-int ft_printf(const char *str, ...);
-```
-
-### AUTO-ALLOCATOR
-
-- Library to auto allocate and free all memory used.
-
-> Usage: 
-
-- Use the function 'AA_allocate_ptr' to get a new ptr. Or, use the function 'AA_push_ptr' to push your own ptr.
-- You can delete your ptr with the function 'AA_free_ptr'.
-- Also, you can delete all your ptrs with the function 'AA_free' at the end of your program.
-
-```C
-void *AA_allocate_ptr(size_t size, size_t var_size);
-void AA_free_ptr(void *ptr);
-void AA_push_ptr(void *ptr);
-void AA_free(void);
-size_t AA_get_node_size(void);
-void AA_print_nodes(void);
-```
-
-### BINARY-TREE
-
-- Simple binary-tree, faster than linked list.
-
-```C
-T_NODE *BT_new_node(void *data);
-T_NODE *BT_insert_node(T_NODE *root, void *data);
-T_NODE *BT_get_root(void);
-size_t BT_get_node_size(void);
-void BT_display_nodes(T_NODE *node);
-void *BT_delete_node(T_NODE *root, void *data, int delete_data);
-void BT_delete_tree(T_NODE *root, int delete_data);
-```
-
-### CLASSES
-
-> Vector
-
-```C
-Vector *vector_new(size_t size, size_t count);
-void vector_delete(Vector *vector);
-size_t vector_size(Vector *vector);
-size_t vector_max_size(Vector *vector);
-void vector_resize(Vector *vector, size_t size);
-size_t vector_capacity(Vector *vector);
-int vector_empty(Vector *vector);
-void vector_reserve(Vector *vector, size_t size);
-void *vector_at(Vector *vector, size_t index);
-void *vector_front(Vector *vector);
-void *vector_back(Vector *vector);
-void *vector_data(Vector *vector);
-void vector_assign(Vector *vector, void **ptrs);
-void vector_push_back(Vector *vector, void *ptr);
-void vector_pop_back(Vector *vector);
-void vector_insert(Vector *vector, void *ptr, size_t index);
-void vector_erase(Vector *vector, size_t index);
-void vector_swap(Vector *vector, size_t index, size_t index2);
-void vector_swap_ptrs(Vector *vector, void *ptr, void *ptr2);
-void vector_clear(Vector *vector);
-```
-
+A few functions still carry names from when this was a strict 42 assignment (`ft_ccof`, `ft_lentc`, `ft_scof` and similar abbreviations that made more sense under a stricter naming convention than they do in isolation). I left them as they are rather than rename them purely for cosmetics; every non-obvious one has a short comment next to its prototype in `libft.h` explaining what it actually does.

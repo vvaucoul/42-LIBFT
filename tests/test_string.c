@@ -1,10 +1,13 @@
 /* ************************************************************************** */
-/*   test_string.c - srcs/string/ft_strings.c                                */
 /*                                                                            */
-/*   Several functions here `free()` the pointer they are handed (ft_strzap, */
-/*   ft_substr, ft_strremove, ft_strrdbls) or mutate it in place             */
-/*   (ft_strtrim) - those tests use libc strdup()/malloc() to build a real,  */
-/*   independently freeable heap buffer rather than a string literal.       */
+/*                                                        :::      ::::::::   */
+/*   test_string.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvaucoul <vvaucoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/30 19:19:17 by vvaucoul          #+#    #+#             */
+/*   Updated: 2026/07/30 19:19:17 by vvaucoul         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
@@ -43,32 +46,40 @@ TEST(string, strchr_finds_char_and_terminator)
 	ASSERT_EQ_PTR(ft_strchr(s, '\0'), s + 5);
 }
 
-/* ft_strcpy's very first line is `if (str) return (NULL);` - inverted from
-** the obviously-intended `if (!str)`. Any call with a real (non-NULL)
-** source string returns NULL immediately instead of copying it. */
-TEST(string, strcpy_always_null_on_real_input_known_bug)
+TEST(string, strcpy_copies_into_provided_buffer)
 {
 	char dest[16];
+	char *r;
 
-	ASSERT_MSG(ft_strcpy(dest, "hi") != NULL,
-		"ft_strcpy(dest, \"hi\") should copy and return dest, but the "
-		"inverted `if (str) return NULL;` guard makes it always return "
-		"NULL for a non-NULL source");
+	r = ft_strcpy(dest, "hi");
+	ASSERT_EQ_PTR(r, dest);
+	ASSERT_EQ_STR(dest, "hi");
 }
 
-/* ft_strdup allocates ft_calloc(sizeof(char), ft_strlen(str)) - exactly
-** strlen(str) bytes, with no "+1" for the NUL terminator - so the copy
-** fills the entire buffer and is never actually NUL-terminated. */
-TEST(string, strdup_missing_null_terminator_known_bug_isolated)
+TEST(string, strcpy_null_dest_allocates_fresh_buffer)
+{
+	char *s = ft_strcpy(NULL, "hello");
+
+	ASSERT_NOT_NULL(s);
+	ASSERT_EQ_STR(s, "hello");
+	free(s);
+}
+
+TEST(string, strcpy_null_str_returns_null)
+{
+	char dest[4];
+
+	ASSERT_NULL(ft_strcpy(dest, NULL));
+}
+
+TEST(string, strdup_null_terminates_correctly)
 {
 	char *dup = ft_strdup("hello");
 
 	ASSERT_NOT_NULL(dup);
-	ASSERT_MSG(!memcmp(dup, "hello", 5),
-		"ft_strdup(\"hello\") should at least copy the 5 bytes correctly");
-	/* Reading `dup` as a NUL-terminated string past this point (strlen,
-	** printf %s, strcmp...) is technically an out-of-bounds read - the
-	** allocation is exactly 5 bytes long. Not done here on purpose. */
+	ASSERT_EQ_STR(dup, "hello");
+	ASSERT_EQ_INT((int)ft_strlen(dup), 5);
+	free(dup);
 }
 
 TEST(string, strdup_null_returns_null)
@@ -165,8 +176,7 @@ TEST(string, strsncmp_prefix_match)
 	ASSERT(ft_strsncmp("hello", "help", 0, 4) != 0);
 }
 
-/* ft_strzap only strips `pat` when it is a PREFIX of str (via
-** ft_strsncmp), not "anywhere in the string" despite the generic name. */
+/* ft_strzap only strips `pat` when it is a prefix of str, not anywhere in it. */
 TEST(string, strzap_removes_matching_prefix)
 {
 	char *s = ft_strzap(strdup("hello world"), "hello ");
@@ -193,19 +203,12 @@ TEST(string, substr_from_start_extracts_prefix)
 	free(s);
 }
 
-/* The copy loop is `for (i = start; str[i] && i < len; ++i)` - the upper
-** bound compares the absolute index `i` against `len` instead of against
-** `start + len`. Whenever `start >= len` (an extremely common case - any
-** substring that doesn't start at/near index 0), the loop condition is
-** false on its very first check and nothing is ever copied. */
-TEST(string, substr_nonzero_start_known_bug)
+TEST(string, substr_nonzero_start_extracts_correct_slice)
 {
 	char *s = ft_substr(strdup("hello world"), 6, 5);
 
 	ASSERT_NOT_NULL(s);
-	ASSERT_MSG(!strcmp(s, "world"),
-		"ft_substr(\"hello world\", 6, 5) should extract \"world\", got "
-		"\"%s\" (the loop bound `i < len` should be `i < start + len`)", s);
+	ASSERT_EQ_STR(s, "world");
 	free(s);
 }
 
@@ -238,13 +241,7 @@ TEST(string, strmapi_null_returns_null)
 	ASSERT_NULL(ft_strmapi(NULL, to_upper_cb));
 }
 
-/* ft_strtrim removes EVERY ' ' character it finds by scanning left to
-** right and memmove-ing the rest of the string over it - leading,
-** trailing, AND internal spaces are all stripped. This is a much broader
-** operation than a typical "trim" (leading/trailing only). It also only
-** recognizes ' ' (see ft_isspace), not \t \n etc. Mutates in place and
-** returns the same pointer, so it needs a writable buffer, not a literal. */
-TEST(string, strtrim_removes_every_space_not_just_edges_known_bug)
+TEST(string, strtrim_strips_only_leading_and_trailing_whitespace)
 {
 	char buf[32];
 	char *r;
@@ -252,9 +249,16 @@ TEST(string, strtrim_removes_every_space_not_just_edges_known_bug)
 	strcpy(buf, "  a b  ");
 	r = ft_strtrim(buf);
 	ASSERT_EQ_PTR(r, buf);
-	ASSERT_MSG(!strcmp(buf, "ab"),
-		"ft_strtrim(\"  a b  \"): expected \"ab\" (it strips every space, "
-		"not just the leading/trailing ones), got \"%s\"", buf);
+	ASSERT_EQ_STR(buf, "a b");
+}
+
+TEST(string, strtrim_also_strips_tabs_and_newlines)
+{
+	char buf[32];
+
+	strcpy(buf, "\ta\nb\t");
+	ft_strtrim(buf);
+	ASSERT_EQ_STR(buf, "a\nb");
 }
 
 TEST(string, strtrim_no_spaces_is_noop)
@@ -264,6 +268,15 @@ TEST(string, strtrim_no_spaces_is_noop)
 	strcpy(buf, "hello");
 	ft_strtrim(buf);
 	ASSERT_EQ_STR(buf, "hello");
+}
+
+TEST(string, strtrim_all_whitespace_becomes_empty)
+{
+	char buf[16];
+
+	strcpy(buf, "   \t\n  ");
+	ft_strtrim(buf);
+	ASSERT_EQ_STR(buf, "");
 }
 
 TEST(string, strremove_deletes_every_matching_char)
@@ -293,20 +306,31 @@ TEST(string, strrep_replaces_substring)
 	free(s);
 }
 
-/* ft_strrep bails out early with NULL only via ft_scof(src, pat), which
-** checks character-level overlap between src and pat, NOT whether pat
-** occurs as a substring of src - a much weaker (and different) test than
-** what the early-return is presumably meant to guard. This makes the
-** "no match" return value inconsistent: sometimes an unchanged copy,
-** sometimes NULL, depending on incidental shared characters. */
-TEST(string, strrep_pattern_absent_but_chars_overlap_known_bug)
+TEST(string, strrep_replaces_every_occurrence)
+{
+	char *s = ft_strrep(strdup("a-b-c-d"), "-", "_");
+
+	ASSERT_NOT_NULL(s);
+	ASSERT_EQ_STR(s, "a_b_c_d");
+	free(s);
+}
+
+TEST(string, strrep_pattern_absent_but_chars_overlap)
 {
 	char *s = ft_strrep(strdup("hello"), "xyz-not-there-e", "***");
 
 	ASSERT_NOT_NULL(s);
-	ASSERT_MSG(!strcmp(s, "hello"),
-		"ft_strrep with a non-matching pattern should return the string "
-		"unchanged, got \"%s\"", s ? s : "(null)");
+	ASSERT_EQ_STR(s, "hello");
+	free(s);
+}
+
+TEST(string, strrep_pattern_genuinely_absent_no_overlap)
+{
+	char *s = ft_strrep(strdup("hello"), "xyz", "***");
+
+	ASSERT_NOT_NULL(s);
+	ASSERT_EQ_STR(s, "hello");
+	free(s);
 }
 
 TEST(string, strsplit_splits_on_separator)
@@ -323,4 +347,82 @@ TEST(string, strsplit_splits_on_separator)
 	free(words[0]);
 	free(words[1]);
 	free(words[2]);
+}
+
+TEST(string, strstr_finds_substring)
+{
+	const char *s = "hello world";
+
+	ASSERT_EQ_PTR(ft_strstr(s, "world"), s + 6);
+	ASSERT_EQ_PTR(ft_strstr(s, "hello"), s);
+	ASSERT_NULL(ft_strstr(s, "xyz"));
+}
+
+TEST(string, strstr_empty_needle_returns_haystack)
+{
+	const char *s = "hello";
+
+	ASSERT_EQ_PTR(ft_strstr(s, ""), s);
+}
+
+TEST(string, strstr_null_args_return_null)
+{
+	ASSERT_NULL(ft_strstr(NULL, "x"));
+	ASSERT_NULL(ft_strstr("x", NULL));
+}
+
+TEST(string, strrchr_finds_last_occurrence)
+{
+	const char *s = "hello";
+
+	ASSERT_EQ_PTR(ft_strrchr(s, 'l'), s + 3);
+	ASSERT_EQ_PTR(ft_strrchr(s, 'h'), s);
+	ASSERT_NULL(ft_strrchr(s, 'z'));
+}
+
+TEST(string, strrchr_finds_terminator)
+{
+	const char *s = "hello";
+
+	ASSERT_EQ_PTR(ft_strrchr(s, '\0'), s + 5);
+}
+
+TEST(string, strcasecmp_ignores_case)
+{
+	ASSERT_EQ_INT(ft_strcasecmp("Hello", "HELLO"), 0);
+	ASSERT_EQ_INT(ft_strcasecmp("abc", "abc"), 0);
+	ASSERT(ft_strcasecmp("abc", "abd") < 0);
+	ASSERT(ft_strcasecmp("ABD", "abc") > 0);
+}
+
+TEST(string, strncasecmp_ignores_case_within_length)
+{
+	ASSERT_EQ_INT(ft_strncasecmp("HELLOworld", "hello", 5), 0);
+	ASSERT(ft_strncasecmp("HELLOa", "HELLOb", 6) != 0);
+}
+
+TEST(string, strupper_transforms_in_place)
+{
+	char buf[32];
+	char *r;
+
+	strcpy(buf, "Hello, World! 42");
+	r = ft_strupper(buf);
+	ASSERT_EQ_PTR(r, buf);
+	ASSERT_EQ_STR(buf, "HELLO, WORLD! 42");
+}
+
+TEST(string, strlower_transforms_in_place)
+{
+	char buf[32];
+
+	strcpy(buf, "Hello, World! 42");
+	ft_strlower(buf);
+	ASSERT_EQ_STR(buf, "hello, world! 42");
+}
+
+TEST(string, strupper_strlower_null_returns_null)
+{
+	ASSERT_NULL(ft_strupper(NULL));
+	ASSERT_NULL(ft_strlower(NULL));
 }
